@@ -363,7 +363,7 @@
     // Mobile filter drawer controls
     function openMobileFilter() {
       if (!mobileFilterDrawer) return;
-      mobileFilterDrawer.classList.remove("translate-x-full");
+      mobileFilterDrawer.classList.remove("-translate-x-full");
       mobileFilterDrawer.classList.add("translate-x-0");
       if (mobileFilterBackdrop) {
         mobileFilterBackdrop.classList.remove(
@@ -381,7 +381,7 @@
     function closeMobileFilter() {
       if (!mobileFilterDrawer) return;
       mobileFilterDrawer.classList.remove("translate-x-0");
-      mobileFilterDrawer.classList.add("translate-x-full");
+      mobileFilterDrawer.classList.add("-translate-x-full");
       if (mobileFilterBackdrop) {
         mobileFilterBackdrop.classList.remove(
           "opacity-100",
