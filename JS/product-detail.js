@@ -239,9 +239,9 @@
               <i class="${isFav ? "fa-solid text-accent" : "fa-regular"} fa-heart text-xs" aria-hidden="true"></i>
             </button>
           </div>
-          <h4 class="font-display font-medium text-sm text-text group-hover:text-accent transition-colors">
+          <h3 class="font-display font-medium text-sm text-text group-hover:text-accent transition-colors">
             <a href="./Product_Detail.html?id=${rel.id}" class="after:absolute after:inset-0 after:z-0">${rel.name}</a>
-          </h4>
+          </h3>
           <p class="text-xs text-muted mb-2">${rel.subtitle}</p>
           <div class="flex items-center justify-between pt-2 border-t border-border mt-auto">
             <span class="font-display font-bold text-accent text-sm">$${rel.price}</span>

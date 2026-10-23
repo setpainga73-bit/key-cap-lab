@@ -248,11 +248,11 @@
             <span class="uppercase tracking-wider font-medium">${product.category}</span>
           </div>
 
-          <h3 class="font-display font-medium text-base text-text group-hover:text-accent transition-colors">
+          <h2 class="font-display font-medium text-base text-text group-hover:text-accent transition-colors">
             <a href="${detailHref}" class="after:absolute after:inset-0 after:z-0">
               ${product.name}
             </a>
-          </h3>
+          </h2>
           <p class="text-xs text-muted mt-1 mb-4 line-clamp-1">${product.subtitle}</p>
         </div>
 
@@ -262,7 +262,7 @@
             type="button"
             class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-surface-2 hover:bg-accent hover:text-on-accent text-text border border-border hover:border-accent transition-colors cursor-pointer"
             data-cart-add="true"
-            aria-label="Add ${product.name} to cart"
+            aria-label="Add to cart: ${product.name}"
           >
             <i class="fa-solid fa-plus text-[10px]" aria-hidden="true"></i>
             Add
