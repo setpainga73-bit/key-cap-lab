@@ -11,14 +11,19 @@
     const drawer = document.querySelector("[data-mobile-drawer]");
     const backdrop = document.querySelector("[data-drawer-backdrop]");
     const closeBtn = document.querySelector("[data-drawer-close]");
+    const menuIcon = menuToggle?.querySelector("[data-menu-icon]");
 
     if (!menuToggle || !drawer) return;
 
     function openDrawer() {
+      drawer.inert = false;
       drawer.classList.remove("translate-x-full");
       drawer.classList.add("translate-x-0");
       drawer.setAttribute("aria-hidden", "false");
       menuToggle.setAttribute("aria-expanded", "true");
+      menuToggle.setAttribute("aria-label", "Close navigation menu");
+      menuIcon?.classList.replace("fa-bars", "fa-xmark");
+      menuIcon?.classList.add("rotate-90");
       if (backdrop) {
         backdrop.classList.remove("opacity-0", "pointer-events-none");
         backdrop.classList.add("opacity-100", "pointer-events-auto");
@@ -31,7 +36,11 @@
       drawer.classList.remove("translate-x-0");
       drawer.classList.add("translate-x-full");
       drawer.setAttribute("aria-hidden", "true");
+      drawer.inert = true;
       menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", "Open navigation menu");
+      menuIcon?.classList.replace("fa-xmark", "fa-bars");
+      menuIcon?.classList.remove("rotate-90");
       if (backdrop) {
         backdrop.classList.remove("opacity-100", "pointer-events-auto");
         backdrop.classList.add("opacity-0", "pointer-events-none");
@@ -53,11 +62,29 @@
     if (backdrop) backdrop.addEventListener("click", closeDrawer);
 
     document.addEventListener("keydown", (e) => {
-      if (
-        e.key === "Escape" &&
-        menuToggle.getAttribute("aria-expanded") === "true"
-      ) {
+      if (menuToggle.getAttribute("aria-expanded") !== "true") return;
+      if (e.key === "Escape") {
         closeDrawer();
+        return;
+      }
+      if (e.key !== "Tab") return;
+
+      const focusableElements = Array.from(
+        drawer.querySelectorAll(
+          'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ),
+      ).filter((element) => element.getClientRects().length > 0);
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (!firstElement) {
+        e.preventDefault();
+      } else if (e.shiftKey && document.activeElement === firstElement) {
+        e.preventDefault();
+        lastElement.focus();
+      } else if (!e.shiftKey && document.activeElement === lastElement) {
+        e.preventDefault();
+        firstElement.focus();
       }
     });
 

@@ -43,7 +43,7 @@
           </a>
 
           <nav
-            class="hidden md:flex items-center gap-6"
+            class="hidden"
             aria-label="Desktop Navigation"
           >
             <a
@@ -80,7 +80,7 @@
             >
           </a>
 
-          <div class="hidden sm:flex items-center gap-2" data-auth-logged-in>
+          <div class="max-sm:hidden hidden sm:flex items-center gap-2" data-auth-logged-in>
             <a
               href="./account.html"
               class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-surface-2 hover:bg-surface border border-accent/40 text-accent transition-colors"
@@ -90,13 +90,13 @@
 
           <button
             type="button"
-            class="md:hidden flex flex-col justify-center items-center w-9 h-9 rounded-xl border border-border bg-surface text-text hover:border-accent transition-colors cursor-pointer"
+            class="flex flex-col justify-center items-center w-9 h-9 rounded-xl border border-border bg-surface text-text hover:border-accent transition-colors cursor-pointer shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             data-menu-toggle
             aria-label="Open navigation menu"
             aria-expanded="false"
             aria-controls="mobile-drawer"
           >
-            <i class="fa-solid fa-bars text-sm" aria-hidden="true"></i>
+            <i class="fa-solid fa-bars text-sm transition-transform duration-200" data-menu-icon aria-hidden="true"></i>
           </button>
         </div>
       </div>
@@ -114,8 +114,9 @@
       id="mobile-drawer"
       class="fixed inset-y-0 right-0 z-50 w-full max-w-xs bg-bg border-l border-border flex flex-col transition-transform duration-300 translate-x-full shadow-2xl"
       data-mobile-drawer
-      aria-label="Mobile Navigation"
+      aria-label="Site navigation"
       aria-hidden="true"
+      inert
     >
       <div class="flex items-center justify-between p-4 border-b border-border">
         <div class="flex items-center gap-2">
@@ -149,10 +150,30 @@
             ></i>
           </a>
           <a
+            href="./shop.html#bundles"
+            class="flex items-center justify-between py-2.5 px-3 rounded-lg text-base font-medium text-text hover:bg-surface transition-colors"
+          >
+            <span>Preset Bundles</span>
+            <i
+              class="fa-solid fa-chevron-right text-xs text-muted"
+              aria-hidden="true"
+            ></i>
+          </a>
+          <a
             href="./Builder.html"
             class="flex items-center justify-between py-2.5 px-3 rounded-lg text-base font-medium text-text hover:bg-surface transition-colors"
           >
             <span>Keyboard Builder</span>
+            <i
+              class="fa-solid fa-chevron-right text-xs text-muted"
+              aria-hidden="true"
+            ></i>
+          </a>
+          <a
+            href="./wishlist.html"
+            class="flex items-center justify-between py-2.5 px-3 rounded-lg text-base font-medium text-text hover:bg-surface transition-colors"
+          >
+            <span>Saved Wishlist</span>
             <i
               class="fa-solid fa-chevron-right text-xs text-muted"
               aria-hidden="true"
@@ -247,7 +268,7 @@
                     type="tel"
                     id="checkout-phone"
                     name="phone"
-                    placeholder="+1 (555) 000-0000"
+                    placeholder="+95 000 000 000"
                     class="bg-surface-2 border border-border focus:border-accent text-text placeholder:text-muted rounded-xl px-4 py-2.5 text-sm focus:outline-none transition-colors"
                   />
                 </div>
@@ -340,7 +361,7 @@
                     id="checkout-city"
                     name="city"
                     required
-                    placeholder="San Francisco"
+                    placeholder="Yangon"
                     class="bg-surface-2 border border-border focus:border-accent text-text placeholder:text-muted rounded-xl px-4 py-2.5 text-sm focus:outline-none transition-colors"
                   />
                   <span

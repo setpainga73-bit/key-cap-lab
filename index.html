@@ -44,7 +44,7 @@
 
           <!-- Desktop Links -->
           <nav
-            class="hidden md:flex items-center gap-6"
+            class="hidden"
             aria-label="Desktop Navigation"
           >
             <a
@@ -68,7 +68,7 @@
         <!-- Right Side Nav Actions -->
         <div class="flex items-center gap-3 sm:gap-4">
           <!-- Search box -->
-          <div class="hidden lg:flex items-center relative w-56">
+          <div class="hidden">
             <i
               class="fa-solid fa-magnifying-glass absolute left-3 text-muted text-xs pointer-events-none"
               aria-hidden="true"
@@ -85,7 +85,7 @@
           <!-- Wishlist link -->
           <a
             href="./HTML/wishlist.html"
-            class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-muted hover:text-accent hover:bg-surface transition-colors text-sm"
+            class="max-sm:hidden flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-muted hover:text-accent hover:bg-surface transition-colors text-sm"
             aria-label="Wishlist"
           >
             <i class="fa-regular fa-heart text-base" aria-hidden="true"></i>
@@ -114,7 +114,7 @@
           </a>
 
           <!-- Logged out buttons -->
-          <div class="hidden sm:flex items-center gap-2" data-auth-logged-out>
+          <div class="max-sm:hidden hidden sm:flex items-center gap-2" data-auth-logged-out>
             <a
               href="./HTML/Login.html"
               class="px-3.5 py-1.5 rounded-xl text-xs font-semibold text-text hover:text-accent border border-border hover:border-muted transition-colors"
@@ -128,7 +128,7 @@
           </div>
 
           <!-- Logged in buttons -->
-          <div class="hidden sm:flex items-center gap-2" data-auth-logged-in>
+          <div class="max-sm:hidden hidden sm:flex items-center gap-2" data-auth-logged-in>
             <a
               href="./HTML/account.html"
               class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-surface-2 hover:bg-surface border border-accent/40 text-accent transition-colors"
@@ -150,13 +150,13 @@
           <!-- Mobile Menu Hamburger Button -->
           <button
             type="button"
-            class="md:hidden flex flex-col justify-center items-center w-9 h-9 rounded-xl border border-border bg-surface text-text hover:border-accent transition-colors cursor-pointer"
+            class="flex flex-col justify-center items-center w-9 h-9 rounded-xl border border-border bg-surface text-text hover:border-accent transition-colors cursor-pointer shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             data-menu-toggle
             aria-label="Open navigation menu"
             aria-expanded="false"
             aria-controls="mobile-drawer"
           >
-            <i class="fa-solid fa-bars text-sm" aria-hidden="true"></i>
+            <i class="fa-solid fa-bars text-sm transition-transform duration-200" data-menu-icon aria-hidden="true"></i>
           </button>
         </div>
       </div>
@@ -174,8 +174,9 @@
       id="mobile-drawer"
       class="fixed inset-y-0 right-0 z-50 w-full max-w-xs bg-bg border-l border-border flex flex-col transition-transform duration-300 translate-x-full shadow-2xl"
       data-mobile-drawer
-      aria-label="Mobile Navigation"
+      aria-label="Site navigation"
       aria-hidden="true"
+      inert
     >
       <!-- Drawer Header -->
       <div class="flex items-center justify-between p-4 border-b border-border">

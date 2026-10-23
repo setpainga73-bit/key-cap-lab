@@ -43,7 +43,7 @@
           </a>
 
           <nav
-            class="hidden md:flex items-center gap-6"
+            class="hidden"
             aria-label="Desktop Navigation"
           >
             <a
@@ -67,7 +67,7 @@
         <div class="flex items-center gap-3 sm:gap-4">
           <a
             href="./wishlist.html"
-            class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-muted hover:text-accent hover:bg-surface transition-colors text-sm"
+            class="max-sm:hidden flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-muted hover:text-accent hover:bg-surface transition-colors text-sm"
             aria-label="Wishlist"
           >
             <i class="fa-regular fa-heart text-base" aria-hidden="true"></i>
@@ -108,13 +108,13 @@
 
           <button
             type="button"
-            class="md:hidden flex flex-col justify-center items-center w-9 h-9 rounded-xl border border-border bg-surface text-text hover:border-accent transition-colors cursor-pointer"
+            class="flex flex-col justify-center items-center w-9 h-9 rounded-xl border border-border bg-surface text-text hover:border-accent transition-colors cursor-pointer shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             data-menu-toggle
             aria-label="Open navigation menu"
             aria-expanded="false"
             aria-controls="mobile-drawer"
           >
-            <i class="fa-solid fa-bars text-sm" aria-hidden="true"></i>
+            <i class="fa-solid fa-bars text-sm transition-transform duration-200" data-menu-icon aria-hidden="true"></i>
           </button>
         </div>
       </div>
@@ -132,8 +132,9 @@
       id="mobile-drawer"
       class="fixed inset-y-0 right-0 z-50 w-full max-w-xs bg-bg border-l border-border flex flex-col transition-transform duration-300 translate-x-full shadow-2xl"
       data-mobile-drawer
-      aria-label="Mobile Navigation"
+      aria-label="Site navigation"
       aria-hidden="true"
+      inert
     >
       <div class="flex items-center justify-between p-4 border-b border-border">
         <div class="flex items-center gap-2">
@@ -161,6 +162,16 @@
             class="flex items-center justify-between py-2.5 px-3 rounded-lg text-base font-medium text-text hover:bg-surface transition-colors"
           >
             <span>Shop All Products</span>
+            <i
+              class="fa-solid fa-chevron-right text-xs text-muted"
+              aria-hidden="true"
+            ></i>
+          </a>
+          <a
+            href="./shop.html#bundles"
+            class="flex items-center justify-between py-2.5 px-3 rounded-lg text-base font-medium text-text hover:bg-surface transition-colors"
+          >
+            <span>Preset Bundles</span>
             <i
               class="fa-solid fa-chevron-right text-xs text-muted"
               aria-hidden="true"
@@ -202,6 +213,7 @@
           <button
             type="button"
             data-nav-logout
+            class="max-sm:hidden px-2.5 py-1.5 rounded-xl text-xs font-medium text-muted hover:text-red-400 transition-colors cursor-pointer"
             class="w-full py-2.5 text-center rounded-xl text-sm font-semibold text-red-400 border border-red-500/30 hover:bg-red-500/10 transition-colors cursor-pointer"
           >
             Sign out
