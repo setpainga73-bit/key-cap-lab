@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Saved Wishlist | Keycap Lab</title>
+    <meta
+      name="description"
+      content="Saved keyboard parts, switches, keycaps, and kits in your Keycap Lab wishlist."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../dist/output.css" />
+    <script src="../JS/products.js" defer></script>
+    <script src="../JS/cart.js" defer></script>
+    <script src="../JS/nav-bar.js" defer></script>
+  </head>
+  <body
+    class="bg-bg text-text font-body min-h-screen flex flex-col selection:bg-accent selection:text-on-accent"
+  >
+    <!-- Navbar -->
+    <header
+      class="sticky top-0 z-40 w-full bg-bg/95 backdrop-blur-md border-b border-border"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4"
+      >
+        <div class="flex items-center gap-8">
+          <a
+            href="../index.html"
+            class="flex items-center gap-2.5 font-display font-bold text-xl text-text hover:text-accent transition-colors"
+          >
+            <span>Keycap Lab</span>
+          </a>
+
+          <nav
+            class="hidden md:flex items-center gap-6"
+            aria-label="Desktop Navigation"
+          >
+            <a
+              href="./shop.html"
+              class="text-sm font-medium text-muted hover:text-text transition-colors"
+              >Shop</a
+            >
+            <a
+              href="./shop.html#bundles"
+              class="text-sm font-medium text-muted hover:text-text transition-colors"
+              >Bundles</a
+            >
+            <a
+              href="./Builder.html"
+              class="text-sm font-medium text-muted hover:text-text transition-colors"
+              >Builder</a
+            >
+          </nav>
+        </div>
+
+        <div class="flex items-center gap-3 sm:gap-4">
+          <a
+            href="./wishlist.html"
+            class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-surface-2 border border-accent/40 text-accent transition-colors text-sm"
+            aria-current="page"
+            aria-label="Wishlist"
+          >
+            <i
+              class="fa-solid fa-heart text-base text-accent"
+              aria-hidden="true"
+            ></i>
+            <span class="hidden sm:inline font-semibold">Wishlist</span>
+            <span
+              class="wishlist-count inline-flex items-center justify-center px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-accent text-on-accent"
+              >0</span
+            >
+          </a>
+
+          <a
+            href="./Cart.html"
+            class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-surface border border-border hover:border-accent text-text transition-colors text-sm"
+            aria-label="View Cart"
+          >
+            <i
+              class="fa-solid fa-cart-shopping text-accent text-sm"
+              aria-hidden="true"
+            ></i>
+            <span class="hidden sm:inline font-medium">Cart</span>
+            <span
+              class="cart-count inline-flex items-center justify-center px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-accent text-on-accent"
+              >0</span
+            >
+          </a>
+
+          <div class="hidden sm:flex items-center gap-2" data-auth-logged-out>
+            <a
+              href="./Login.html"
+              class="px-3.5 py-1.5 rounded-xl text-xs font-semibold text-text hover:text-accent border border-border hover:border-muted transition-colors"
+              >Log in</a
+            >
+            <a
+              href="./Register.html"
+              class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-accent hover:bg-accent-hover text-on-accent transition-colors"
+              >Register</a
+            >
+          </div>
+
+          <div class="hidden sm:flex items-center gap-2" data-auth-logged-in>
+            <a
+              href="./account.html"
+              class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-surface-2 hover:bg-surface border border-accent/40 text-accent transition-colors"
+              >Account</a
+            >
+            <button
+              type="button"
+              data-nav-logout
+              class="px-2.5 py-1.5 rounded-xl text-xs font-medium text-muted hover:text-red-400 transition-colors cursor-pointer"
+              aria-label="Log out"
+            >
+              <i
+                class="fa-solid fa-arrow-right-from-bracket"
+                aria-hidden="true"
+              ></i>
+            </button>
+          </div>
+
+          <button
+            type="button"
+            class="md:hidden flex flex-col justify-center items-center w-9 h-9 rounded-xl border border-border bg-surface text-text hover:border-accent transition-colors cursor-pointer"
+            data-menu-toggle
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="mobile-drawer"
+          >
+            <i class="fa-solid fa-bars text-sm" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Drawer & Backdrop -->
+    <div
+      class="fixed inset-0 z-40 bg-black/70 backdrop-blur-xs transition-opacity duration-300 opacity-0 pointer-events-none"
+      data-drawer-backdrop
+      tabindex="-1"
+      aria-hidden="true"
+    ></div>
+
+    <aside
+      id="mobile-drawer"
+      class="fixed inset-y-0 right-0 z-50 w-full max-w-xs bg-bg border-l border-border flex flex-col transition-transform duration-300 translate-x-full shadow-2xl"
+      data-mobile-drawer
+      aria-label="Mobile Navigation"
+      aria-hidden="true"
+    >
+      <div class="flex items-center justify-between p-4 border-b border-border">
+        <div class="flex items-center gap-2">
+          <span class="font-display font-bold text-lg text-text"
+            >Keycap Lab</span
+          >
+        </div>
+        <button
+          type="button"
+          class="p-2 rounded-lg text-muted hover:text-text cursor-pointer transition-colors"
+          data-drawer-close
+          aria-label="Close navigation menu"
+        >
+          <i class="fa-solid fa-xmark text-lg" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div class="flex-1 overflow-y-auto p-4 flex flex-col gap-6">
+        <nav
+          class="flex flex-col gap-1 border-b border-border pb-4"
+          aria-label="Mobile links"
+        >
+          <a
+            href="./shop.html"
+            class="flex items-center justify-between py-2.5 px-3 rounded-lg text-base font-medium text-text hover:bg-surface transition-colors"
+          >
+            <span>Shop All Products</span>
+            <i
+              class="fa-solid fa-chevron-right text-xs text-muted"
+              aria-hidden="true"
+            ></i>
+          </a>
+          <a
+            href="./Builder.html"
+            class="flex items-center justify-between py-2.5 px-3 rounded-lg text-base font-medium text-text hover:bg-surface transition-colors"
+          >
+            <span>Keyboard Builder</span>
+            <i
+              class="fa-solid fa-chevron-right text-xs text-muted"
+              aria-hidden="true"
+            ></i>
+          </a>
+          <a
+            href="./wishlist.html"
+            class="flex items-center justify-between py-2.5 px-3 rounded-lg text-base font-semibold text-accent bg-surface-2 transition-colors"
+          >
+            <span>Saved Wishlist</span>
+            <span
+              class="wishlist-count px-2 py-0.5 rounded-full text-xs font-bold bg-accent text-on-accent"
+              >0</span
+            >
+          </a>
+          <a
+            href="./Cart.html"
+            class="flex items-center justify-between py-2.5 px-3 rounded-lg text-base font-medium text-text hover:bg-surface transition-colors"
+          >
+            <span>Shopping Cart</span>
+            <span
+              class="cart-count px-2 py-0.5 rounded-full text-xs font-bold bg-accent text-on-accent"
+              >0</span
+            >
+          </a>
+          <a
+            href="./account.html"
+            class="flex items-center justify-between py-2.5 px-3 rounded-lg text-base font-medium text-text hover:bg-surface transition-colors"
+          >
+            <span>Account Dashboard</span>
+            <i
+              class="fa-solid fa-chevron-right text-xs text-muted"
+              aria-hidden="true"
+            ></i>
+          </a>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Main Wishlist Page -->
+    <main
+      class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12"
+    >
+      <div
+        class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border pb-6 mb-8"
+      >
+        <div>
+          <h1 class="font-display font-bold text-3xl sm:text-4xl text-text">
+            Saved Wishlist
+            <span
+              id="wishlist-total-header"
+              class="text-sm font-normal text-muted ml-2"
+              >(0 items)</span
+            >
+          </h1>
+          <p class="text-xs text-muted mt-1">
+            Products and components you have saved for your keyboard projects.
+          </p>
+        </div>
+        <a
+          href="./shop.html"
+          class="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:underline"
+        >
+          <i class="fa-solid fa-arrow-left text-[10px]" aria-hidden="true"></i>
+          <span>Continue Shopping</span>
+        </a>
+      </div>
+
+      <!-- Wishlist Empty State -->
+      <div
+        id="wishlist-empty-state"
+        class="hidden flex flex-col items-center justify-center py-20 px-4 text-center bg-surface rounded-2xl border border-border"
+      >
+        <div
+          class="w-20 h-20 rounded-full bg-surface-2 flex items-center justify-center text-muted text-3xl mb-4 border border-border"
+        >
+          <i class="fa-regular fa-heart" aria-hidden="true"></i>
+        </div>
+        <h2 class="font-display font-bold text-2xl text-text mb-2">
+          Your wishlist is empty
+        </h2>
+        <p class="text-sm text-muted max-w-sm mb-6 leading-relaxed">
+          Tap the heart icon on any keyboard kit, switch pack, or keycap set to
+          keep track of items you love.
+        </p>
+        <a
+          href="./shop.html"
+          class="px-6 py-3 rounded-xl font-semibold text-sm bg-accent hover:bg-accent-hover text-on-accent transition-colors"
+        >
+          Explore Keyboard Parts
+        </a>
+      </div>
+
+      <!-- Wishlist Grid -->
+      <div
+        id="wishlist-grid"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+      ></div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full bg-surface border-t border-border mt-16">
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col md:flex-row items-center justify-between gap-6"
+      >
+        <div class="flex items-center gap-3">
+          <div>
+            <span class="font-display font-bold text-lg text-text"
+              >Keycap Lab</span
+            >
+            <p class="text-xs text-muted">
+              Premium parts and preset bundles for custom keyboards.
+            </p>
+          </div>
+        </div>
+
+        <nav
+          class="flex flex-wrap items-center gap-6 text-xs text-muted"
+          aria-label="Footer links"
+        >
+          <a href="../index.html" class="hover:text-text transition-colors"
+            >Home</a
+          >
+          <a href="./shop.html" class="hover:text-text transition-colors"
+            >Shop All</a
+          >
+          <a
+            href="./shop.html#bundles"
+            class="hover:text-text transition-colors"
+            >Preset Kits</a
+          >
+          <a href="./Builder.html" class="hover:text-text transition-colors"
+            >Keyboard Builder</a
+          >
+          <a href="./account.html" class="hover:text-text transition-colors"
+            >My Account</a
+          >
+        </nav>
+
+        <p class="text-xs text-muted">
+          &copy; 2026 Keycap Lab. All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+    <!-- Wishlist Page Script -->
+    <script>
+      (() => {
+        const currency = new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+        });
+
+        function renderWishlistPage() {
+          const items = window.KeycapWishlist
+            ? window.KeycapWishlist.getItems()
+            : [];
+          const grid = document.getElementById("wishlist-grid");
+          const emptyState = document.getElementById("wishlist-empty-state");
+          const headerCount = document.getElementById("wishlist-total-header");
+
+          if (headerCount)
+            headerCount.textContent = `(${items.length} ${items.length === 1 ? "item" : "items"})`;
+
+          if (items.length === 0) {
+            if (emptyState) emptyState.classList.remove("hidden");
+            if (grid) grid.innerHTML = "";
+            return;
+          }
+
+          if (emptyState) emptyState.classList.add("hidden");
+          if (!grid) return;
+
+          grid.innerHTML = "";
+          items.forEach((item) => {
+            const article = document.createElement("article");
+            article.className =
+              "flex flex-col justify-between p-4 rounded-xl bg-surface border border-border hover:border-muted transition-colors";
+
+            article.innerHTML = `
+              <div class="relative w-full h-44 rounded-lg overflow-hidden bg-surface-2 mb-3">
+                ${
+                  item.image
+                    ? `<img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover" />`
+                    : `<div class="w-full h-full flex items-center justify-center text-muted"><i class="fa-solid fa-keyboard text-3xl"></i></div>`
+                }
+                <button
+                  type="button"
+                  class="absolute top-2.5 right-2.5 p-2 rounded-full bg-bg/80 border border-border text-muted hover:text-red-400 cursor-pointer transition-colors"
+                  data-remove-id="${item.id}"
+                  aria-label="Remove ${item.name} from wishlist"
+                >
+                  <i class="fa-solid fa-xmark text-sm" aria-hidden="true"></i>
+                </button>
+              </div>
+
+              <div class="flex-1 flex flex-col mb-3">
+                <h3 class="font-display font-medium text-base text-text mb-1">
+                  <a href="./Product_Detail.html?id=${item.id}" class="hover:text-accent transition-colors">${item.name}</a>
+                </h3>
+                <p class="text-xs text-muted line-clamp-1">${item.subtitle || ""}</p>
+              </div>
+
+              <div class="flex items-center justify-between pt-3 border-t border-border mt-auto">
+                <span class="font-display font-bold text-lg text-accent">${currency.format(item.price || 0)}</span>
+                <button
+                  type="button"
+                  class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-surface-2 hover:bg-accent hover:text-on-accent text-text border border-border hover:border-accent transition-colors cursor-pointer"
+                  data-add-cart-id="${item.id}"
+                >
+                  <i class="fa-solid fa-plus text-[10px]" aria-hidden="true"></i>
+                  Add to Cart
+                </button>
+              </div>
+            `;
+
+            article
+              .querySelector("[data-remove-id]")
+              .addEventListener("click", () => {
+                window.KeycapWishlist.removeItem(item.id);
+                renderWishlistPage();
+              });
+
+            article
+              .querySelector("[data-add-cart-id]")
+              .addEventListener("click", () => {
+                window.KeycapCart.addItem({
+                  id: item.id,
+                  name: item.name,
+                  desc: item.subtitle || "",
+                  price: item.price || 0,
+                  qty: 1,
+                  image: item.image,
+                });
+              });
+
+            grid.appendChild(article);
+          });
+        }
+
+        document.addEventListener("DOMContentLoaded", renderWishlistPage);
+        window.addEventListener("wishlist:changed", renderWishlistPage);
+      })();
+    </script>
+  </body>
+</html>

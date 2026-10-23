@@ -1,0 +1,1234 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Keyboard Builder | Keycap Lab</title>
+    <meta
+      name="description"
+      content="Interactive mechanical keyboard builder. Select compatible cases, PCBs, switches, and keycaps."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../dist/output.css" />
+    <script src="../JS/products.js" defer></script>
+    <script src="../JS/cart.js" defer></script>
+    <script src="../JS/nav-bar.js" defer></script>
+    <script src="../JS/builder.js" defer></script>
+  </head>
+  <body
+    class="bg-bg text-text font-body min-h-screen flex flex-col selection:bg-accent selection:text-on-accent"
+  >
+    <!-- Navbar -->
+    <header
+      class="sticky top-0 z-40 w-full bg-bg/95 backdrop-blur-md border-b border-border"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4"
+      >
+        <!-- Logo -->
+        <div class="flex items-center gap-8">
+          <a
+            href="../index.html"
+            class="flex items-center gap-2.5 font-display font-bold text-xl text-text hover:text-accent transition-colors"
+          >
+            <span>Keycap Lab</span>
+          </a>
+
+          <!-- Desktop Links -->
+          <nav
+            class="hidden md:flex items-center gap-6"
+            aria-label="Desktop Navigation"
+          >
+            <a
+              href="./shop.html"
+              class="text-sm font-medium text-muted hover:text-text transition-colors"
+              >Shop</a
+            >
+            <a
+              href="./shop.html#bundles"
+              class="text-sm font-medium text-muted hover:text-text transition-colors"
+              >Bundles</a
+            >
+            <a
+              href="./Builder.html"
+              class="text-sm font-semibold text-accent transition-colors"
+              aria-current="page"
+              >Builder</a
+            >
+          </nav>
+        </div>
+
+        <!-- Right Side Nav Actions -->
+        <div class="flex items-center gap-3 sm:gap-4">
+          <div class="hidden lg:flex items-center relative w-56">
+            <i
+              class="fa-solid fa-magnifying-glass absolute left-3 text-muted text-xs pointer-events-none"
+              aria-hidden="true"
+            ></i>
+            <input
+              type="search"
+              placeholder="Search parts (Enter)..."
+              class="w-full bg-surface border border-border focus:border-accent text-text placeholder:text-muted rounded-xl pl-8 pr-3 py-1.5 text-xs focus:outline-none transition-colors"
+              data-nav-search
+              aria-label="Search keyboard parts"
+            />
+          </div>
+
+          <a
+            href="./wishlist.html"
+            class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-muted hover:text-accent hover:bg-surface transition-colors text-sm"
+            aria-label="Wishlist"
+          >
+            <i class="fa-regular fa-heart text-base" aria-hidden="true"></i>
+            <span class="hidden sm:inline font-medium">Wishlist</span>
+            <span
+              class="wishlist-count inline-flex items-center justify-center px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-surface-2 text-accent border border-accent/20"
+              >0</span
+            >
+          </a>
+
+          <a
+            href="./Cart.html"
+            class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-surface border border-border hover:border-accent text-text transition-colors text-sm"
+            aria-label="View Cart"
+          >
+            <i
+              class="fa-solid fa-cart-shopping text-accent text-sm"
+              aria-hidden="true"
+            ></i>
+            <span class="hidden sm:inline font-medium">Cart</span>
+            <span
+              class="cart-count inline-flex items-center justify-center px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-accent text-on-accent"
+              >0</span
+            >
+          </a>
+
+          <div class="hidden sm:flex items-center gap-2" data-auth-logged-out>
+            <a
+              href="./Login.html"
+              class="px-3.5 py-1.5 rounded-xl text-xs font-semibold text-text hover:text-accent border border-border hover:border-muted transition-colors"
+              >Log in</a
+            >
+            <a
+              href="./Register.html"
+              class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-accent hover:bg-accent-hover text-on-accent transition-colors"
+              >Register</a
+            >
+          </div>
+
+          <div class="hidden sm:flex items-center gap-2" data-auth-logged-in>
+            <a
+              href="./account.html"
+              class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-surface-2 hover:bg-surface border border-accent/40 text-accent transition-colors"
+              >Account</a
+            >
+            <button
+              type="button"
+              data-nav-logout
+              class="px-2.5 py-1.5 rounded-xl text-xs font-medium text-muted hover:text-red-400 transition-colors cursor-pointer"
+              aria-label="Log out"
+            >
+              <i
+                class="fa-solid fa-arrow-right-from-bracket"
+                aria-hidden="true"
+              ></i>
+            </button>
+          </div>
+
+          <button
+            type="button"
+            class="md:hidden flex flex-col justify-center items-center w-9 h-9 rounded-xl border border-border bg-surface text-text hover:border-accent transition-colors cursor-pointer"
+            data-menu-toggle
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="mobile-drawer"
+          >
+            <i class="fa-solid fa-bars text-sm" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Drawer & Backdrop -->
+    <div
+      class="fixed inset-0 z-40 bg-black/70 backdrop-blur-xs transition-opacity duration-300 opacity-0 pointer-events-none"
+      data-drawer-backdrop
+      tabindex="-1"
+      aria-hidden="true"
+    ></div>
+
+    <aside
+      id="mobile-drawer"
+      class="fixed inset-y-0 right-0 z-50 w-full max-w-xs bg-bg border-l border-border flex flex-col transition-transform duration-300 translate-x-full shadow-2xl"
+      data-mobile-drawer
+      aria-label="Mobile Navigation"
+      aria-hidden="true"
+    >
+      <div class="flex items-center justify-between p-4 border-b border-border">
+        <div class="flex items-center gap-2">
+          <span class="font-display font-bold text-lg text-text"
+            >Keycap Lab</span
+          >
+        </div>
+        <button
+          type="button"
+          class="p-2 rounded-lg text-muted hover:text-text cursor-pointer transition-colors"
+          data-drawer-close
+          aria-label="Close navigation menu"
+        >
+          <i class="fa-solid fa-xmark text-lg" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div class="flex-1 overflow-y-auto p-4 flex flex-col gap-6">
+        <div class="relative w-full">
+          <i
+            class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-muted text-xs pointer-events-none"
+            aria-hidden="true"
+          ></i>
+          <input
+            type="search"
+            placeholder="Search parts..."
+            class="w-full bg-surface border border-border focus:border-accent text-text placeholder:text-muted rounded-xl pl-9 pr-3 py-2 text-sm focus:outline-none transition-colors"
+            data-nav-search
+            aria-label="Search keyboard parts mobile"
+          />
+        </div>
+
+        <nav
+          class="flex flex-col gap-1 border-b border-border pb-4"
+          aria-label="Mobile links"
+        >
+          <a
+            href="./shop.html"
+            class="flex items-center justify-between py-2.5 px-3 rounded-lg text-base font-medium text-text hover:bg-surface transition-colors"
+          >
+            <span>Shop All Products</span>
+            <i
+              class="fa-solid fa-chevron-right text-xs text-muted"
+              aria-hidden="true"
+            ></i>
+          </a>
+          <a
+            href="./shop.html#bundles"
+            class="flex items-center justify-between py-2.5 px-3 rounded-lg text-base font-medium text-text hover:bg-surface transition-colors"
+          >
+            <span>Preset Bundles</span>
+            <i
+              class="fa-solid fa-chevron-right text-xs text-muted"
+              aria-hidden="true"
+            ></i>
+          </a>
+          <a
+            href="./Builder.html"
+            class="flex items-center justify-between py-2.5 px-3 rounded-lg text-base font-semibold text-accent bg-surface-2 transition-colors"
+          >
+            <span>Keyboard Builder</span>
+            <span
+              class="px-2 py-0.5 rounded text-[10px] font-bold bg-accent/20 text-accent border border-accent/30"
+              >Active</span
+            >
+          </a>
+          <a
+            href="./wishlist.html"
+            class="flex items-center justify-between py-2.5 px-3 rounded-lg text-base font-medium text-text hover:bg-surface transition-colors"
+          >
+            <span>Saved Wishlist</span>
+            <span
+              class="wishlist-count px-2 py-0.5 rounded-full text-xs font-bold bg-surface-2 text-accent"
+              >0</span
+            >
+          </a>
+          <a
+            href="./Cart.html"
+            class="flex items-center justify-between py-2.5 px-3 rounded-lg text-base font-medium text-text hover:bg-surface transition-colors"
+          >
+            <span>Shopping Cart</span>
+            <span
+              class="cart-count px-2 py-0.5 rounded-full text-xs font-bold bg-accent text-on-accent"
+              >0</span
+            >
+          </a>
+        </nav>
+
+        <div class="mt-auto flex flex-col gap-2 pt-4">
+          <div class="flex flex-col gap-2" data-auth-logged-out>
+            <a
+              href="./Login.html"
+              class="w-full py-2.5 text-center rounded-xl text-sm font-semibold border border-border text-text hover:border-muted transition-colors"
+              >Log in</a
+            >
+            <a
+              href="./Register.html"
+              class="w-full py-2.5 text-center rounded-xl text-sm font-semibold bg-accent hover:bg-accent-hover text-on-accent transition-colors"
+              >Register</a
+            >
+          </div>
+          <div class="flex flex-col gap-2" data-auth-logged-in>
+            <a
+              href="./account.html"
+              class="w-full py-2.5 text-center rounded-xl text-sm font-semibold bg-surface-2 border border-accent/40 text-accent transition-colors"
+              >My Account Dashboard</a
+            >
+            <button
+              type="button"
+              data-nav-logout
+              class="w-full py-2.5 text-center rounded-xl text-sm font-semibold text-muted hover:text-red-400 border border-border transition-colors cursor-pointer"
+            >
+              Sign out
+            </button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Builder Application -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <!-- Step Navigation Indicators -->
+      <nav
+        class="flex items-center gap-2 overflow-x-auto pb-4 mb-6 border-b border-border"
+        aria-label="Builder steps"
+      >
+        <button
+          type="button"
+          class="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold bg-accent text-on-accent transition-colors cursor-pointer"
+          data-builder-step-nav="0"
+        >
+          <span>01</span>
+          <span>Layout</span>
+        </button>
+        <button
+          type="button"
+          class="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold bg-surface text-muted border border-border hover:border-muted transition-colors cursor-pointer"
+          data-builder-step-nav="1"
+        >
+          <span>02</span>
+          <span>Case</span>
+        </button>
+        <button
+          type="button"
+          class="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold bg-surface text-muted border border-border hover:border-muted transition-colors cursor-pointer"
+          data-builder-step-nav="2"
+        >
+          <span>03</span>
+          <span>PCB</span>
+        </button>
+        <button
+          type="button"
+          class="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold bg-surface text-muted border border-border hover:border-muted transition-colors cursor-pointer"
+          data-builder-step-nav="3"
+        >
+          <span>04</span>
+          <span>Switches</span>
+        </button>
+        <button
+          type="button"
+          class="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold bg-surface text-muted border border-border hover:border-muted transition-colors cursor-pointer"
+          data-builder-step-nav="4"
+        >
+          <span>05</span>
+          <span>Keycaps</span>
+        </button>
+        <button
+          type="button"
+          class="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold bg-surface text-muted border border-border hover:border-muted transition-colors cursor-pointer"
+          data-builder-step-nav="5"
+        >
+          <span>06</span>
+          <span>Review</span>
+        </button>
+      </nav>
+
+      <!-- Step Header -->
+      <div class="mb-6">
+        <span
+          id="builder-step-kicker"
+          class="text-xs font-bold uppercase tracking-wider text-accent"
+          >Step 1 of 6</span
+        >
+        <h1
+          id="builder-step-title"
+          class="font-display font-bold text-2xl sm:text-3xl text-text mt-1"
+        >
+          Choose your layout
+        </h1>
+        <p id="builder-step-desc" class="text-sm text-muted mt-1">
+          Select the footprint and form factor for your custom keyboard.
+        </p>
+        <p
+          id="builder-step-error"
+          class="text-xs font-semibold text-red-400 mt-2 min-h-[1rem]"
+          aria-live="polite"
+        ></p>
+      </div>
+
+      <!-- Builder Layout: Steps Content & Summary Sidebar -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Interactive Options Column (Left 8 cols) -->
+        <div class="lg:col-span-8 flex flex-col gap-6">
+          <!-- Step 0: Layout Options -->
+          <div
+            data-builder-step-panel="layout"
+            class="grid grid-cols-1 sm:grid-cols-2 gap-4"
+          >
+            <!-- 60% -->
+            <button
+              type="button"
+              class="flex flex-col justify-between p-5 rounded-xl border border-border bg-surface hover:border-muted transition-all cursor-pointer text-left"
+              data-builder-option
+              data-category="layout"
+              data-name="60%"
+              data-layout-tag="60"
+              data-price="0"
+              data-desc="Compact 61-key layout, ultra-portable"
+            >
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="font-display font-bold text-2xl text-text"
+                    >60%</span
+                  >
+                  <i
+                    class="selection-check fa-solid fa-circle-check text-accent hidden"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <p class="text-xs text-muted mb-4">
+                  No dedicated arrow keys or function row. Maximizes desk space
+                  for mouse movement.
+                </p>
+              </div>
+              <div
+                class="flex items-center justify-between pt-3 border-t border-border text-xs"
+              >
+                <span class="text-accent font-semibold">Included</span>
+                <span class="text-muted">61 keys</span>
+              </div>
+            </button>
+
+            <!-- 65% (Default selected) -->
+            <button
+              type="button"
+              class="is-selected flex flex-col justify-between p-5 rounded-xl border border-accent bg-surface-2 transition-all cursor-pointer text-left"
+              data-builder-option
+              data-category="layout"
+              data-name="65%"
+              data-layout-tag="65"
+              data-price="0"
+              data-desc="Enthusiast favorite with dedicated arrows"
+            >
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="font-display font-bold text-2xl text-text"
+                    >65%</span
+                  >
+                  <i
+                    class="selection-check fa-solid fa-circle-check text-accent"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <p class="text-xs text-muted mb-4">
+                  The sweet spot. Retains full arrow keys and navigation cluster
+                  while staying compact.
+                </p>
+              </div>
+              <div
+                class="flex items-center justify-between pt-3 border-t border-border text-xs"
+              >
+                <span class="text-accent font-semibold">Included</span>
+                <span class="text-muted">67 keys</span>
+              </div>
+            </button>
+
+            <!-- 75% -->
+            <button
+              type="button"
+              class="flex flex-col justify-between p-5 rounded-xl border border-border bg-surface hover:border-muted transition-all cursor-pointer text-left"
+              data-builder-option
+              data-category="layout"
+              data-name="75%"
+              data-layout-tag="75"
+              data-price="0"
+              data-desc="Dedicated F-row and rotary encoder support"
+            >
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="font-display font-bold text-2xl text-text"
+                    >75%</span
+                  >
+                  <i
+                    class="selection-check fa-solid fa-circle-check text-accent hidden"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <p class="text-xs text-muted mb-4">
+                  Includes the top function key row (F1-F12) and volume knob
+                  support with compact spacing.
+                </p>
+              </div>
+              <div
+                class="flex items-center justify-between pt-3 border-t border-border text-xs"
+              >
+                <span class="text-accent font-semibold">Included</span>
+                <span class="text-muted">82 keys</span>
+              </div>
+            </button>
+
+            <!-- TKL -->
+            <button
+              type="button"
+              class="flex flex-col justify-between p-5 rounded-xl border border-border bg-surface hover:border-muted transition-all cursor-pointer text-left"
+              data-builder-option
+              data-category="layout"
+              data-name="TKL"
+              data-layout-tag="tkl"
+              data-price="0"
+              data-desc="Tenkeyless standard layout without numpad"
+            >
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="font-display font-bold text-2xl text-text"
+                    >TKL</span
+                  >
+                  <i
+                    class="selection-check fa-solid fa-circle-check text-accent hidden"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <p class="text-xs text-muted mb-4">
+                  Standard traditional desktop layout without the number pad.
+                  Familiar and productive.
+                </p>
+              </div>
+              <div
+                class="flex items-center justify-between pt-3 border-t border-border text-xs"
+              >
+                <span class="text-accent font-semibold">Included</span>
+                <span class="text-muted">87 keys</span>
+              </div>
+            </button>
+          </div>
+
+          <!-- Step 1: Case Options -->
+          <div
+            data-builder-step-panel="case"
+            class="hidden grid grid-cols-1 sm:grid-cols-2 gap-4"
+          >
+            <!-- Aluminum Anodized Case -->
+            <button
+              type="button"
+              class="flex flex-col justify-between p-5 rounded-xl border border-border bg-surface hover:border-muted transition-all cursor-pointer text-left"
+              data-builder-option
+              data-category="case"
+              data-name="Studio Aluminum Case"
+              data-layouts="60,65,75,tkl"
+              data-price="110"
+              data-desc="CNC 6063 aerospace aluminum with brass weight"
+            >
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <h3 class="font-display font-semibold text-base text-text">
+                    Studio Aluminum Case
+                  </h3>
+                  <i
+                    class="selection-check fa-solid fa-circle-check text-accent hidden"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <p class="text-xs text-muted mb-3">
+                  Machined from 6063 aluminum block with polished internal brass
+                  weight and gasket mount.
+                </p>
+              </div>
+              <div
+                class="flex items-center justify-between pt-3 border-t border-border"
+              >
+                <span class="font-display font-bold text-base text-accent"
+                  >$110</span
+                >
+                <span class="text-xs text-muted">Compatible</span>
+              </div>
+            </button>
+
+            <!-- Frosted Polycarbonate Case -->
+            <button
+              type="button"
+              class="flex flex-col justify-between p-5 rounded-xl border border-border bg-surface hover:border-muted transition-all cursor-pointer text-left"
+              data-builder-option
+              data-category="case"
+              data-name="Frosted Polycarbonate Case"
+              data-layouts="60,65,75,tkl"
+              data-price="75"
+              data-desc="Diffused RGB aesthetics, deep acoustic clack"
+            >
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <h3 class="font-display font-semibold text-base text-text">
+                    Frosted Polycarbonate Case
+                  </h3>
+                  <i
+                    class="selection-check fa-solid fa-circle-check text-accent hidden"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <p class="text-xs text-muted mb-3">
+                  Semi-translucent frosted polycarbonate that diffuses underglow
+                  lighting for an ambient glow.
+                </p>
+              </div>
+              <div
+                class="flex items-center justify-between pt-3 border-t border-border"
+              >
+                <span class="font-display font-bold text-base text-accent"
+                  >$75</span
+                >
+                <span class="text-xs text-muted">Compatible</span>
+              </div>
+            </button>
+
+            <!-- Solid Walnut Hardwood Case -->
+            <button
+              type="button"
+              class="flex flex-col justify-between p-5 rounded-xl border border-border bg-surface hover:border-muted transition-all cursor-pointer text-left"
+              data-builder-option
+              data-category="case"
+              data-name="Walnut Hardwood Case"
+              data-layouts="60,65,75,tkl"
+              data-price="120"
+              data-desc="Hand-finished natural walnut wood"
+            >
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <h3 class="font-display font-semibold text-base text-text">
+                    Walnut Hardwood Case
+                  </h3>
+                  <i
+                    class="selection-check fa-solid fa-circle-check text-accent hidden"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <p class="text-xs text-muted mb-3">
+                  Solid organic walnut conditioned with natural wax. Deep
+                  organic resonance and unique grain.
+                </p>
+              </div>
+              <div
+                class="flex items-center justify-between pt-3 border-t border-border"
+              >
+                <span class="font-display font-bold text-base text-accent"
+                  >$120</span
+                >
+                <span class="text-xs text-muted">Compatible</span>
+              </div>
+            </button>
+          </div>
+
+          <!-- Step 2: PCB Options -->
+          <div
+            data-builder-step-panel="pcb"
+            class="hidden grid grid-cols-1 sm:grid-cols-2 gap-4"
+          >
+            <!-- Hotswap RGB PCB -->
+            <button
+              type="button"
+              class="flex flex-col justify-between p-5 rounded-xl border border-border bg-surface hover:border-muted transition-all cursor-pointer text-left"
+              data-builder-option
+              data-category="pcb"
+              data-name="Hotswap RGB PCB"
+              data-layouts="60,65,75,tkl"
+              data-price="55"
+              data-desc="Kailh hotswap sockets & south-facing RGB"
+            >
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <h3 class="font-display font-semibold text-base text-text">
+                    Hotswap RGB PCB
+                  </h3>
+                  <i
+                    class="selection-check fa-solid fa-circle-check text-accent hidden"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <p class="text-xs text-muted mb-3">
+                  Zero soldering required. Pop switches in and out with ease.
+                  VIA and QMK compatible.
+                </p>
+              </div>
+              <div
+                class="flex items-center justify-between pt-3 border-t border-border"
+              >
+                <span class="font-display font-bold text-base text-accent"
+                  >$55</span
+                >
+                <span class="text-xs text-muted">Hot-swap</span>
+              </div>
+            </button>
+
+            <!-- Solderable Pro PCB -->
+            <button
+              type="button"
+              class="flex flex-col justify-between p-5 rounded-xl border border-border bg-surface hover:border-muted transition-all cursor-pointer text-left"
+              data-builder-option
+              data-category="pcb"
+              data-name="Solderable Pro VIA PCB"
+              data-layouts="60,65,75,tkl"
+              data-price="45"
+              data-desc="Multi-layout support including split space"
+            >
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <h3 class="font-display font-semibold text-base text-text">
+                    Solderable Pro VIA PCB
+                  </h3>
+                  <i
+                    class="selection-check fa-solid fa-circle-check text-accent hidden"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <p class="text-xs text-muted mb-3">
+                  Allows multi-layout customisation (split Backspace, stepped
+                  Caps Lock, ISO Enter).
+                </p>
+              </div>
+              <div
+                class="flex items-center justify-between pt-3 border-t border-border"
+              >
+                <span class="font-display font-bold text-base text-accent"
+                  >$45</span
+                >
+                <span class="text-xs text-muted">Soldered</span>
+              </div>
+            </button>
+          </div>
+
+          <!-- Step 3: Switches Options -->
+          <div
+            data-builder-step-panel="switches"
+            class="hidden grid grid-cols-1 sm:grid-cols-2 gap-4"
+          >
+            <!-- Gateron Oil King -->
+            <button
+              type="button"
+              class="flex flex-col justify-between p-5 rounded-xl border border-border bg-surface hover:border-muted transition-all cursor-pointer text-left"
+              data-builder-option
+              data-category="switches"
+              data-name="Gateron Oil King Linear (70x)"
+              data-price="45"
+              data-desc="55g Linear, pre-lubed, deep sound"
+            >
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <h3 class="font-display font-semibold text-base text-text">
+                    Gateron Oil King Linear
+                  </h3>
+                  <i
+                    class="selection-check fa-solid fa-circle-check text-accent hidden"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <p class="text-xs text-muted mb-3">
+                  Ultra smooth factory lubed linear switches with nylon top
+                  housing for a deep clack.
+                </p>
+              </div>
+              <div
+                class="flex items-center justify-between pt-3 border-t border-border"
+              >
+                <span class="font-display font-bold text-base text-accent"
+                  >$45</span
+                >
+                <span class="text-xs text-muted">Linear 55g</span>
+              </div>
+            </button>
+
+            <!-- Boba U4T -->
+            <button
+              type="button"
+              class="flex flex-col justify-between p-5 rounded-xl border border-border bg-surface hover:border-muted transition-all cursor-pointer text-left"
+              data-builder-option
+              data-category="switches"
+              data-name="Boba U4T Tactile (70x)"
+              data-price="52"
+              data-desc="62g Tactile, distinct D-bump"
+            >
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <h3 class="font-display font-semibold text-base text-text">
+                    Boba U4T Tactile
+                  </h3>
+                  <i
+                    class="selection-check fa-solid fa-circle-check text-accent hidden"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <p class="text-xs text-muted mb-3">
+                  Crisp, satisfying tactile bump right at the very top of
+                  actuation. Enthusiast favorite.
+                </p>
+              </div>
+              <div
+                class="flex items-center justify-between pt-3 border-t border-border"
+              >
+                <span class="font-display font-bold text-base text-accent"
+                  >$52</span
+                >
+                <span class="text-xs text-muted">Tactile 62g</span>
+              </div>
+            </button>
+
+            <!-- Silent Peach -->
+            <button
+              type="button"
+              class="flex flex-col justify-between p-5 rounded-xl border border-border bg-surface hover:border-muted transition-all cursor-pointer text-left"
+              data-builder-option
+              data-category="switches"
+              data-name="Silent Peach Linear (70x)"
+              data-price="38"
+              data-desc="35g Silent, silicone dampeners"
+            >
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <h3 class="font-display font-semibold text-base text-text">
+                    Silent Peach Linear
+                  </h3>
+                  <i
+                    class="selection-check fa-solid fa-circle-check text-accent hidden"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <p class="text-xs text-muted mb-3">
+                  Whisper-quiet typing designed for office and shared spaces
+                  without loud keystroke clatter.
+                </p>
+              </div>
+              <div
+                class="flex items-center justify-between pt-3 border-t border-border"
+              >
+                <span class="font-display font-bold text-base text-accent"
+                  >$38</span
+                >
+                <span class="text-xs text-muted">Silent 35g</span>
+              </div>
+            </button>
+
+            <!-- Clicky Blue Pro -->
+            <button
+              type="button"
+              class="flex flex-col justify-between p-5 rounded-xl border border-border bg-surface hover:border-muted transition-all cursor-pointer text-left"
+              data-builder-option
+              data-category="switches"
+              data-name="Clicky Blue Pro (70x)"
+              data-price="35"
+              data-desc="50g Clicky with audible click bar"
+            >
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <h3 class="font-display font-semibold text-base text-text">
+                    Clicky Blue Pro
+                  </h3>
+                  <i
+                    class="selection-check fa-solid fa-circle-check text-accent hidden"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <p class="text-xs text-muted mb-3">
+                  Crisp click-bar acoustic mechanism delivering satisfying
+                  tactile and auditory feedback.
+                </p>
+              </div>
+              <div
+                class="flex items-center justify-between pt-3 border-t border-border"
+              >
+                <span class="font-display font-bold text-base text-accent"
+                  >$35</span
+                >
+                <span class="text-xs text-muted">Clicky 50g</span>
+              </div>
+            </button>
+          </div>
+
+          <!-- Step 4: Keycaps Options -->
+          <div
+            data-builder-step-panel="keycaps"
+            class="hidden grid grid-cols-1 sm:grid-cols-2 gap-4"
+          >
+            <!-- Minimalist Dark PBT -->
+            <button
+              type="button"
+              class="flex flex-col justify-between p-5 rounded-xl border border-border bg-surface hover:border-muted transition-all cursor-pointer text-left"
+              data-builder-option
+              data-category="keycaps"
+              data-name="Minimalist Dark PBT Keycaps"
+              data-price="65"
+              data-desc="Cherry profile, 1.5mm thick PBT, dye-sub"
+            >
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <h3 class="font-display font-semibold text-base text-text">
+                    Minimalist Dark PBT
+                  </h3>
+                  <i
+                    class="selection-check fa-solid fa-circle-check text-accent hidden"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <p class="text-xs text-muted mb-3">
+                  Stealth dark grey and black theme with crisp amber accents.
+                  Thick matte anti-shine PBT.
+                </p>
+              </div>
+              <div
+                class="flex items-center justify-between pt-3 border-t border-border"
+              >
+                <span class="font-display font-bold text-base text-accent"
+                  >$65</span
+                >
+                <span class="text-xs text-muted">Cherry Profile</span>
+              </div>
+            </button>
+
+            <!-- Retro Classic Dye-Sub -->
+            <button
+              type="button"
+              class="flex flex-col justify-between p-5 rounded-xl border border-border bg-surface hover:border-muted transition-all cursor-pointer text-left"
+              data-builder-option
+              data-category="keycaps"
+              data-name="Retro Classic Keycaps"
+              data-price="58"
+              data-desc="Vintage 1980s beige and stone grey"
+            >
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <h3 class="font-display font-semibold text-base text-text">
+                    Retro Classic Keycaps
+                  </h3>
+                  <i
+                    class="selection-check fa-solid fa-circle-check text-accent hidden"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <p class="text-xs text-muted mb-3">
+                  Two-tone vintage workstation look. Thick dye-sublimated
+                  legends that never fade.
+                </p>
+              </div>
+              <div
+                class="flex items-center justify-between pt-3 border-t border-border"
+              >
+                <span class="font-display font-bold text-base text-accent"
+                  >$58</span
+                >
+                <span class="text-xs text-muted">Cherry Profile</span>
+              </div>
+            </button>
+
+            <!-- Amber Glow Doubleshot -->
+            <button
+              type="button"
+              class="flex flex-col justify-between p-5 rounded-xl border border-border bg-surface hover:border-muted transition-all cursor-pointer text-left"
+              data-builder-option
+              data-category="keycaps"
+              data-name="Amber Glow Doubleshot Keycaps"
+              data-price="68"
+              data-desc="High contrast amber legends on obsidian black"
+            >
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <h3 class="font-display font-semibold text-base text-text">
+                    Amber Glow Doubleshot
+                  </h3>
+                  <i
+                    class="selection-check fa-solid fa-circle-check text-accent hidden"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <p class="text-xs text-muted mb-3">
+                  Striking high-contrast doubleshot injection legends with
+                  Keycap Lab signature amber accents.
+                </p>
+              </div>
+              <div
+                class="flex items-center justify-between pt-3 border-t border-border"
+              >
+                <span class="font-display font-bold text-base text-accent"
+                  >$68</span
+                >
+                <span class="text-xs text-muted">OEM Profile</span>
+              </div>
+            </button>
+
+            <!-- Chalk White PBT -->
+            <button
+              type="button"
+              class="flex flex-col justify-between p-5 rounded-xl border border-border bg-surface hover:border-muted transition-all cursor-pointer text-left"
+              data-builder-option
+              data-category="keycaps"
+              data-name="Chalk White PBT Set"
+              data-price="60"
+              data-desc="Clean matte chalk white with pastel accents"
+            >
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <h3 class="font-display font-semibold text-base text-text">
+                    Chalk White PBT Set
+                  </h3>
+                  <i
+                    class="selection-check fa-solid fa-circle-check text-accent hidden"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <p class="text-xs text-muted mb-3">
+                  Bright modern aesthetic with soft textured surface. Crisp font
+                  legends.
+                </p>
+              </div>
+              <div
+                class="flex items-center justify-between pt-3 border-t border-border"
+              >
+                <span class="font-display font-bold text-base text-accent"
+                  >$60</span
+                >
+                <span class="text-xs text-muted">XDA Profile</span>
+              </div>
+            </button>
+          </div>
+
+          <!-- Step 5: Review & Finalize -->
+          <div
+            data-builder-step-panel="review"
+            class="hidden flex flex-col gap-6"
+          >
+            <div id="builder-review-content"></div>
+          </div>
+
+          <!-- Navigation Controls Bar -->
+          <div
+            class="flex items-center justify-between pt-6 border-t border-border mt-4"
+          >
+            <button
+              type="button"
+              id="builder-prev-btn"
+              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm bg-surface hover:bg-surface-2 text-text border border-border hover:border-muted transition-colors cursor-pointer"
+            >
+              <i class="fa-solid fa-arrow-left text-xs" aria-hidden="true"></i>
+              <span>Previous</span>
+            </button>
+
+            <button
+              type="button"
+              id="builder-next-btn"
+              class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl font-semibold text-sm bg-accent hover:bg-accent-hover text-on-accent transition-colors cursor-pointer"
+            >
+              <span>Next: Case</span>
+              <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Sticky Summary Sidebar (Right 4 cols) -->
+        <aside
+          class="lg:col-span-4 bg-surface rounded-2xl border border-border p-6 flex flex-col gap-6 sticky top-24"
+          aria-label="Build summary"
+        >
+          <div
+            class="flex items-center justify-between border-b border-border pb-4"
+          >
+            <div>
+              <span
+                class="text-xs font-bold uppercase tracking-wider text-muted"
+                >Your Custom Build</span
+              >
+              <h2 class="font-display font-bold text-lg text-text">
+                Component Summary
+              </h2>
+            </div>
+            <span
+              id="builder-layout-badge"
+              class="px-2.5 py-1 rounded-full text-xs font-bold bg-accent/20 text-accent border border-accent/30"
+            >
+              65% Layout
+            </span>
+          </div>
+
+          <!-- Selected parts list -->
+          <div class="flex flex-col gap-3.5">
+            <!-- 01 Layout -->
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <span
+                  class="text-[11px] font-semibold uppercase tracking-wider text-muted block"
+                  >01 Layout</span
+                >
+                <span
+                  id="summary-item-layout"
+                  class="text-sm font-medium text-text"
+                  >65%</span
+                >
+              </div>
+              <span
+                id="summary-price-layout"
+                class="text-xs font-semibold text-accent"
+                >Included</span
+              >
+            </div>
+
+            <!-- 02 Case -->
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <span
+                  class="text-[11px] font-semibold uppercase tracking-wider text-muted block"
+                  >02 Case</span
+                >
+                <span id="summary-item-case" class="text-sm text-muted italic"
+                  >Not selected</span
+                >
+              </div>
+              <span
+                id="summary-price-case"
+                class="text-xs font-semibold text-accent"
+                >—</span
+              >
+            </div>
+
+            <!-- 03 PCB -->
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <span
+                  class="text-[11px] font-semibold uppercase tracking-wider text-muted block"
+                  >03 PCB</span
+                >
+                <span id="summary-item-pcb" class="text-sm text-muted italic"
+                  >Not selected</span
+                >
+              </div>
+              <span
+                id="summary-price-pcb"
+                class="text-xs font-semibold text-accent"
+                >—</span
+              >
+            </div>
+
+            <!-- 04 Switches -->
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <span
+                  class="text-[11px] font-semibold uppercase tracking-wider text-muted block"
+                  >04 Switches</span
+                >
+                <span
+                  id="summary-item-switches"
+                  class="text-sm text-muted italic"
+                  >Not selected</span
+                >
+              </div>
+              <span
+                id="summary-price-switches"
+                class="text-xs font-semibold text-accent"
+                >—</span
+              >
+            </div>
+
+            <!-- 05 Keycaps -->
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <span
+                  class="text-[11px] font-semibold uppercase tracking-wider text-muted block"
+                  >05 Keycaps</span
+                >
+                <span
+                  id="summary-item-keycaps"
+                  class="text-sm text-muted italic"
+                  >Not selected</span
+                >
+              </div>
+              <span
+                id="summary-price-keycaps"
+                class="text-xs font-semibold text-accent"
+                >—</span
+              >
+            </div>
+          </div>
+
+          <!-- Total Calculation -->
+          <div
+            class="pt-4 border-t border-border flex items-center justify-between"
+          >
+            <div>
+              <span class="text-xs text-muted block">Total Components</span>
+              <strong
+                class="font-display font-bold text-2xl text-accent"
+                id="builder-summary-total"
+                >$0</strong
+              >
+            </div>
+            <button
+              type="button"
+              id="builder-save-btn"
+              class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-surface-2 hover:bg-surface border border-border hover:border-accent text-text transition-colors cursor-pointer"
+              aria-label="Save this build to account"
+            >
+              <i class="fa-regular fa-bookmark mr-1" aria-hidden="true"></i>
+              Save
+            </button>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full bg-surface border-t border-border mt-16">
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col md:flex-row items-center justify-between gap-6"
+      >
+        <div class="flex items-center gap-3">
+          <div>
+            <span class="font-display font-bold text-lg text-text"
+              >Keycap Lab</span
+            >
+            <p class="text-xs text-muted">
+              Premium parts and preset bundles for custom keyboards.
+            </p>
+          </div>
+        </div>
+
+        <nav
+          class="flex flex-wrap items-center gap-6 text-xs text-muted"
+          aria-label="Footer links"
+        >
+          <a href="../index.html" class="hover:text-text transition-colors"
+            >Home</a
+          >
+          <a href="./shop.html" class="hover:text-text transition-colors"
+            >Shop All</a
+          >
+          <a
+            href="./shop.html#bundles"
+            class="hover:text-text transition-colors"
+            >Preset Kits</a
+          >
+          <a href="./Builder.html" class="hover:text-text transition-colors"
+            >Keyboard Builder</a
+          >
+          <a href="./wishlist.html" class="hover:text-text transition-colors"
+            >Wishlist</a
+          >
+          <a href="./account.html" class="hover:text-text transition-colors"
+            >My Account</a
+          >
+        </nav>
+
+        <p class="text-xs text-muted">
+          &copy; 2026 Keycap Lab. All rights reserved.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

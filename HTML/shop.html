@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shop Parts &amp; Bundles | Keycap Lab</title>
+    <meta
+      name="description"
+      content="Browse custom keyboard parts, mechanical switches, PBT keycaps, hotswap PCBs, and cases."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../dist/output.css" />
+    <script src="../JS/products.js" defer></script>
+    <script src="../JS/cart.js" defer></script>
+    <script src="../JS/nav-bar.js" defer></script>
+    <script src="../JS/shop.js" defer></script>
+  </head>
+  <body
+    class="bg-bg text-text font-body min-h-screen flex flex-col selection:bg-accent selection:text-on-accent"
+  >
+    <!-- Navbar -->
+    <header
+      class="sticky top-0 z-40 w-full bg-bg/95 backdrop-blur-md border-b border-border"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4"
+      >
+        <!-- Logo -->
+        <div class="flex items-center gap-8">
+          <a
+            href="../index.html"
+            class="flex items-center gap-2.5 font-display font-bold text-xl text-text hover:text-accent transition-colors"
+          >
+            <span>Keycap Lab</span>
+          </a>
+
+          <!-- Desktop Links -->
+          <nav
+            class="hidden md:flex items-center gap-6"
+            aria-label="Desktop Navigation"
+          >
+            <a
+              href="./shop.html"
+              class="text-sm font-semibold text-accent transition-colors"
+              aria-current="page"
+              >Shop</a
+            >
+            <a
+              href="./shop.html#bundles"
+              class="text-sm font-medium text-muted hover:text-text transition-colors"
+              >Bundles</a
+            >
+            <a
+              href="./Builder.html"
+              class="text-sm font-medium text-muted hover:text-text transition-colors"
+              >Builder</a
+            >
+          </nav>
+        </div>
+
+        <!-- Right Side Nav Actions -->
+        <div class="flex items-center gap-3 sm:gap-4">
+          <!-- Search box -->
+          <div class="hidden lg:flex items-center relative w-56">
+            <i
+              class="fa-solid fa-magnifying-glass absolute left-3 text-muted text-xs pointer-events-none"
+              aria-hidden="true"
+            ></i>
+            <input
+              type="search"
+              placeholder="Search parts (Enter)..."
+              class="w-full bg-surface border border-border focus:border-accent text-text placeholder:text-muted rounded-xl pl-8 pr-3 py-1.5 text-xs focus:outline-none transition-colors"
+              data-nav-search
+              aria-label="Search keyboard parts"
+            />
+          </div>
+
+          <!-- Wishlist link -->
+          <a
+            href="./wishlist.html"
+            class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-muted hover:text-accent hover:bg-surface transition-colors text-sm"
+            aria-label="Wishlist"
+          >
+            <i class="fa-regular fa-heart text-base" aria-hidden="true"></i>
+            <span class="hidden sm:inline font-medium">Wishlist</span>
+            <span
+              class="wishlist-count inline-flex items-center justify-center px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-surface-2 text-accent border border-accent/20"
+              >0</span
+            >
+          </a>
+
+          <!-- Cart link -->
+          <a
+            href="./Cart.html"
+            class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-surface border border-border hover:border-accent text-text transition-colors text-sm"
+            aria-label="View Cart"
+          >
+            <i
+              class="fa-solid fa-cart-shopping text-accent text-sm"
+              aria-hidden="true"
+            ></i>
+            <span class="hidden sm:inline font-medium">Cart</span>
+            <span
+              class="cart-count inline-flex items-center justify-center px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-accent text-on-accent"
+              >0</span
+            >
+          </a>
+
+          <!-- Logged out buttons -->
+          <div class="hidden sm:flex items-center gap-2" data-auth-logged-out>
+            <a
+              href="./Login.html"
+              class="px-3.5 py-1.5 rounded-xl text-xs font-semibold text-text hover:text-accent border border-border hover:border-muted transition-colors"
+              >Log in</a
+            >
+            <a
+              href="./Register.html"
+              class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-accent hover:bg-accent-hover text-on-accent transition-colors"
+              >Register</a
+            >
+          </div>
+
+          <!-- Logged in buttons -->
+          <div class="hidden sm:flex items-center gap-2" data-auth-logged-in>
+            <a
+              href="./account.html"
+              class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-surface-2 hover:bg-surface border border-accent/40 text-accent transition-colors"
+              >Account</a
+            >
+            <button
+              type="button"
+              data-nav-logout
+              class="px-2.5 py-1.5 rounded-xl text-xs font-medium text-muted hover:text-red-400 transition-colors cursor-pointer"
+              aria-label="Log out"
+            >
+              <i
+                class="fa-solid fa-arrow-right-from-bracket"
+                aria-hidden="true"
+              ></i>
+            </button>
+          </div>
+
+          <!-- Mobile Menu Hamburger Button -->
+          <button
+            type="button"
+            class="md:hidden flex flex-col justify-center items-center w-9 h-9 rounded-xl border border-border bg-surface text-text hover:border-accent transition-colors cursor-pointer"
+            data-menu-toggle
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="mobile-drawer"
+          >
+            <i class="fa-solid fa-bars text-sm" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Drawer & Backdrop -->
+    <div
+      class="fixed inset-0 z-40 bg-black/70 backdrop-blur-xs transition-opacity duration-300 opacity-0 pointer-events-none"
+      data-drawer-backdrop
+      tabindex="-1"
+      aria-hidden="true"
+    ></div>
+
+    <aside
+      id="mobile-drawer"
+      class="fixed inset-y-0 right-0 z-50 w-full max-w-xs bg-bg border-l border-border flex flex-col transition-transform duration-300 translate-x-full shadow-2xl"
+      data-mobile-drawer
+      aria-label="Mobile Navigation"
+      aria-hidden="true"
+    >
+      <div class="flex items-center justify-between p-4 border-b border-border">
+        <div class="flex items-center gap-2">
+          <span class="font-display font-bold text-lg text-text"
+            >Keycap Lab</span
+          >
+        </div>
+        <button
+          type="button"
+          class="p-2 rounded-lg text-muted hover:text-text cursor-pointer transition-colors"
+          data-drawer-close
+          aria-label="Close navigation menu"
+        >
+          <i class="fa-solid fa-xmark text-lg" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div class="flex-1 overflow-y-auto p-4 flex flex-col gap-6">
+        <div class="relative w-full">
+          <i
+            class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-muted text-xs pointer-events-none"
+            aria-hidden="true"
+          ></i>
+          <input
+            type="search"
+            placeholder="Search parts..."
+            class="w-full bg-surface border border-border focus:border-accent text-text placeholder:text-muted rounded-xl pl-9 pr-3 py-2 text-sm focus:outline-none transition-colors"
+            data-nav-search
+            aria-label="Search keyboard parts mobile"
+          />
+        </div>
+
+        <nav
+          class="flex flex-col gap-1 border-b border-border pb-4"
+          aria-label="Mobile links"
+        >
+          <a
+            href="./shop.html"
+            class="flex items-center justify-between py-2.5 px-3 rounded-lg text-base font-semibold text-accent bg-surface-2 transition-colors"
+          >
+            <span>Shop All Products</span>
+            <i
+              class="fa-solid fa-chevron-right text-xs text-accent"
+              aria-hidden="true"
+            ></i>
+          </a>
+          <a
+            href="./shop.html#bundles"
+            class="flex items-center justify-between py-2.5 px-3 rounded-lg text-base font-medium text-text hover:bg-surface transition-colors"
+          >
+            <span>Preset Bundles</span>
+            <i
+              class="fa-solid fa-chevron-right text-xs text-muted"
+              aria-hidden="true"
+            ></i>
+          </a>
+          <a
+            href="./Builder.html"
+            class="flex items-center justify-between py-2.5 px-3 rounded-lg text-base font-medium text-text hover:bg-surface transition-colors"
+          >
+            <span>Keyboard Builder</span>
+            <span
+              class="px-2 py-0.5 rounded text-[10px] font-bold bg-accent/20 text-accent border border-accent/30"
+              >Interactive</span
+            >
+          </a>
+          <a
+            href="./wishlist.html"
+            class="flex items-center justify-between py-2.5 px-3 rounded-lg text-base font-medium text-text hover:bg-surface transition-colors"
+          >
+            <span>Saved Wishlist</span>
+            <span
+              class="wishlist-count px-2 py-0.5 rounded-full text-xs font-bold bg-surface-2 text-accent"
+              >0</span
+            >
+          </a>
+          <a
+            href="./Cart.html"
+            class="flex items-center justify-between py-2.5 px-3 rounded-lg text-base font-medium text-text hover:bg-surface transition-colors"
+          >
+            <span>Shopping Cart</span>
+            <span
+              class="cart-count px-2 py-0.5 rounded-full text-xs font-bold bg-accent text-on-accent"
+              >0</span
+            >
+          </a>
+        </nav>
+
+        <div class="mt-auto flex flex-col gap-2 pt-4">
+          <div class="flex flex-col gap-2" data-auth-logged-out>
+            <a
+              href="./Login.html"
+              class="w-full py-2.5 text-center rounded-xl text-sm font-semibold border border-border text-text hover:border-muted transition-colors"
+              >Log in</a
+            >
+            <a
+              href="./Register.html"
+              class="w-full py-2.5 text-center rounded-xl text-sm font-semibold bg-accent hover:bg-accent-hover text-on-accent transition-colors"
+              >Register</a
+            >
+          </div>
+          <div class="flex flex-col gap-2" data-auth-logged-in>
+            <a
+              href="./account.html"
+              class="w-full py-2.5 text-center rounded-xl text-sm font-semibold bg-surface-2 border border-accent/40 text-accent transition-colors"
+              >My Account Dashboard</a
+            >
+            <button
+              type="button"
+              data-nav-logout
+              class="w-full py-2.5 text-center rounded-xl text-sm font-semibold text-muted hover:text-red-400 border border-border transition-colors cursor-pointer"
+            >
+              Sign out
+            </button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Mobile Filter Drawer & Backdrop -->
+    <div
+      id="mobile-filter-backdrop"
+      class="fixed inset-0 z-40 bg-black/70 backdrop-blur-xs transition-opacity duration-300 opacity-0 pointer-events-none"
+      tabindex="-1"
+      aria-hidden="true"
+    ></div>
+
+    <aside
+      id="mobile-filter-drawer"
+      class="fixed inset-y-0 left-0 z-50 w-full max-w-xs bg-bg border-r border-border flex flex-col transition-transform duration-300 -translate-x-full shadow-2xl"
+      aria-label="Filter products mobile"
+    >
+      <div class="flex items-center justify-between p-4 border-b border-border">
+        <h3 class="font-display font-bold text-lg text-text">Filters</h3>
+        <button
+          type="button"
+          id="mobile-filter-close"
+          class="p-2 rounded-lg text-muted hover:text-text cursor-pointer transition-colors"
+          aria-label="Close filters"
+        >
+          <i class="fa-solid fa-xmark text-lg" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div class="flex-1 overflow-y-auto p-4 flex flex-col gap-6">
+        <!-- Category in Drawer -->
+        <div>
+          <h4
+            class="text-xs font-semibold uppercase tracking-wider text-muted mb-3"
+          >
+            Category
+          </h4>
+          <div class="flex flex-col gap-2">
+            <label
+              class="flex items-center gap-2.5 text-sm text-text cursor-pointer hover:text-accent"
+            >
+              <input
+                type="radio"
+                name="category"
+                value="all"
+                class="accent-accent"
+                checked
+              />
+              <span>All Categories</span>
+            </label>
+            <label
+              class="flex items-center gap-2.5 text-sm text-text cursor-pointer hover:text-accent"
+            >
+              <input
+                type="radio"
+                name="category"
+                value="kits"
+                class="accent-accent"
+              />
+              <span>Preset Kits &amp; Bundles</span>
+            </label>
+            <label
+              class="flex items-center gap-2.5 text-sm text-text cursor-pointer hover:text-accent"
+            >
+              <input
+                type="radio"
+                name="category"
+                value="cases"
+                class="accent-accent"
+              />
+              <span>Cases</span>
+            </label>
+            <label
+              class="flex items-center gap-2.5 text-sm text-text cursor-pointer hover:text-accent"
+            >
+              <input
+                type="radio"
+                name="category"
+                value="pcbs"
+                class="accent-accent"
+              />
+              <span>PCBs</span>
+            </label>
+            <label
+              class="flex items-center gap-2.5 text-sm text-text cursor-pointer hover:text-accent"
+            >
+              <input
+                type="radio"
+                name="category"
+                value="switches"
+                class="accent-accent"
+              />
+              <span>Mechanical Switches</span>
+            </label>
+            <label
+              class="flex items-center gap-2.5 text-sm text-text cursor-pointer hover:text-accent"
+            >
+              <input
+                type="radio"
+                name="category"
+                value="keycaps"
+                class="accent-accent"
+              />
+              <span>Keycap Sets</span>
+            </label>
+            <label
+              class="flex items-center gap-2.5 text-sm text-text cursor-pointer hover:text-accent"
+            >
+              <input
+                type="radio"
+                name="category"
+                value="accessories"
+                class="accent-accent"
+              />
+              <span>Desk Mats &amp; Accessories</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Layout in Drawer -->
+        <div class="border-t border-border pt-4">
+          <h4
+            class="text-xs font-semibold uppercase tracking-wider text-muted mb-3"
+          >
+            Layout
+          </h4>
+          <div class="flex flex-col gap-2">
+            <label
+              class="flex items-center gap-2.5 text-sm text-text cursor-pointer hover:text-accent"
+            >
+              <input
+                type="checkbox"
+                name="layout"
+                value="60"
+                class="accent-accent"
+              />
+              <span>60% Layout</span>
+            </label>
+            <label
+              class="flex items-center gap-2.5 text-sm text-text cursor-pointer hover:text-accent"
+            >
+              <input
+                type="checkbox"
+                name="layout"
+                value="65"
+                class="accent-accent"
+              />
+              <span>65% Layout</span>
+            </label>
+            <label
+              class="flex items-center gap-2.5 text-sm text-text cursor-pointer hover:text-accent"
+            >
+              <input
+                type="checkbox"
+                name="layout"
+                value="75"
+                class="accent-accent"
+              />
+              <span>75% Layout</span>
+            </label>
+            <label
+              class="flex items-center gap-2.5 text-sm text-text cursor-pointer hover:text-accent"
+            >
+              <input
+                type="checkbox"
+                name="layout"
+                value="tkl"
+                class="accent-accent"
+              />
+              <span>TKL Layout</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-4 border-t border-border">
+        <button
+          type="button"
+          id="mobile-filter-apply"
+          class="w-full py-2.5 text-center rounded-xl font-semibold text-sm bg-accent hover:bg-accent-hover text-on-accent transition-colors cursor-pointer"
+        >
+          Apply Filters
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Shop Area -->
+    <main
+      class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12"
+    >
+      <!-- Page Header -->
+      <div class="flex flex-col gap-4 border-b border-border pb-6 mb-8">
+        <div
+          class="flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+        >
+          <div>
+            <h1 class="font-display font-bold text-3xl sm:text-4xl text-text">
+              Shop
+            </h1>
+            <span
+              id="shop-result-count"
+              class="text-xs text-muted mt-1 block"
+              aria-live="polite"
+              >Showing products</span
+            >
+          </div>
+
+          <!-- Controls: Mobile Filter Toggle, Search Input, and Sorting -->
+          <div class="flex flex-wrap items-center gap-3">
+            <!-- Mobile Filters trigger -->
+            <button
+              type="button"
+              id="mobile-filter-toggle"
+              class="lg:hidden inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold bg-surface border border-border hover:border-accent text-text transition-colors cursor-pointer"
+              aria-label="Open filter drawer"
+            >
+              <i class="fa-solid fa-sliders text-accent" aria-hidden="true"></i>
+              <span>Filters</span>
+            </button>
+
+            <!-- Search in header -->
+            <div class="relative w-48 sm:w-56">
+              <i
+                class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-muted text-xs pointer-events-none"
+                aria-hidden="true"
+              ></i>
+              <input
+                type="search"
+                id="shop-search-input"
+                placeholder="Search catalog..."
+                class="w-full bg-surface border border-border focus:border-accent text-text placeholder:text-muted rounded-xl pl-8 pr-3 py-1.5 text-xs focus:outline-none transition-colors"
+                aria-label="Filter products by name or specs"
+              />
+            </div>
+
+            <!-- Sort dropdown -->
+            <div class="relative">
+              <select
+                id="shop-sort"
+                class="bg-surface border border-border focus:border-accent text-text rounded-xl px-3 py-1.5 text-xs focus:outline-none cursor-pointer transition-colors"
+                aria-label="Sort products"
+              >
+                <option value="featured">Sort: Featured</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="name-asc">Name: A to Z</option>
+                <option value="name-desc">Name: Z to A</option>
+                <option value="rating-desc">Highest Rated</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Active Filter Pills Bar -->
+        <div class="flex flex-wrap items-center gap-2 pt-2">
+          <div
+            id="active-filters"
+            class="flex flex-wrap items-center gap-2"
+          ></div>
+          <button
+            type="button"
+            id="clear-all-filters"
+            class="hidden text-xs text-accent hover:underline font-semibold cursor-pointer ml-1"
+          >
+            Clear all
+          </button>
+        </div>
+      </div>
+
+      <!-- Shop Layout: Sidebar Filters + Products Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <!-- Desktop Sidebar Filters -->
+        <aside
+          class="hidden lg:flex flex-col gap-6"
+          aria-label="Catalog filters"
+        >
+          <!-- Category Filter Group -->
+          <div class="bg-surface rounded-xl border border-border p-5">
+            <h3
+              class="font-display font-semibold text-sm text-text uppercase tracking-wider mb-4"
+            >
+              Categories
+            </h3>
+            <div class="flex flex-col gap-2.5">
+              <label
+                class="flex items-center gap-2.5 text-xs text-text cursor-pointer hover:text-accent transition-colors"
+              >
+                <input
+                  type="radio"
+                  name="category"
+                  value="all"
+                  class="accent-accent"
+                  checked
+                />
+                <span>All Categories</span>
+              </label>
+              <label
+                class="flex items-center gap-2.5 text-xs text-text cursor-pointer hover:text-accent transition-colors"
+              >
+                <input
+                  type="radio"
+                  name="category"
+                  value="kits"
+                  class="accent-accent"
+                />
+                <span>Preset Kits &amp; Bundles</span>
+              </label>
+              <label
+                class="flex items-center gap-2.5 text-xs text-text cursor-pointer hover:text-accent transition-colors"
+              >
+                <input
+                  type="radio"
+                  name="category"
+                  value="cases"
+                  class="accent-accent"
+                />
+                <span>Keyboard Cases</span>
+              </label>
+              <label
+                class="flex items-center gap-2.5 text-xs text-text cursor-pointer hover:text-accent transition-colors"
+              >
+                <input
+                  type="radio"
+                  name="category"
+                  value="pcbs"
+                  class="accent-accent"
+                />
+                <span>PCBs &amp; Electronics</span>
+              </label>
+              <label
+                class="flex items-center gap-2.5 text-xs text-text cursor-pointer hover:text-accent transition-colors"
+              >
+                <input
+                  type="radio"
+                  name="category"
+                  value="switches"
+                  class="accent-accent"
+                />
+                <span>Mechanical Switches</span>
+              </label>
+              <label
+                class="flex items-center gap-2.5 text-xs text-text cursor-pointer hover:text-accent transition-colors"
+              >
+                <input
+                  type="radio"
+                  name="category"
+                  value="keycaps"
+                  class="accent-accent"
+                />
+                <span>Keycap Sets</span>
+              </label>
+              <label
+                class="flex items-center gap-2.5 text-xs text-text cursor-pointer hover:text-accent transition-colors"
+              >
+                <input
+                  type="radio"
+                  name="category"
+                  value="accessories"
+                  class="accent-accent"
+                />
+                <span>Desk Mats &amp; Extras</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Layout Filter Group -->
+          <div class="bg-surface rounded-xl border border-border p-5">
+            <h3
+              class="font-display font-semibold text-sm text-text uppercase tracking-wider mb-4"
+            >
+              Keyboard Layout
+            </h3>
+            <div class="flex flex-col gap-2.5">
+              <label
+                class="flex items-center gap-2.5 text-xs text-text cursor-pointer hover:text-accent transition-colors"
+              >
+                <input
+                  type="checkbox"
+                  name="layout"
+                  value="60"
+                  class="accent-accent"
+                />
+                <span>60% Compact</span>
+              </label>
+              <label
+                class="flex items-center gap-2.5 text-xs text-text cursor-pointer hover:text-accent transition-colors"
+              >
+                <input
+                  type="checkbox"
+                  name="layout"
+                  value="65"
+                  class="accent-accent"
+                />
+                <span>65% Balanced</span>
+              </label>
+              <label
+                class="flex items-center gap-2.5 text-xs text-text cursor-pointer hover:text-accent transition-colors"
+              >
+                <input
+                  type="checkbox"
+                  name="layout"
+                  value="75"
+                  class="accent-accent"
+                />
+                <span>75% Function Row</span>
+              </label>
+              <label
+                class="flex items-center gap-2.5 text-xs text-text cursor-pointer hover:text-accent transition-colors"
+              >
+                <input
+                  type="checkbox"
+                  name="layout"
+                  value="tkl"
+                  class="accent-accent"
+                />
+                <span>TKL Tenkeyless</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Price Range Slider Group -->
+          <div class="bg-surface rounded-xl border border-border p-5">
+            <div class="flex items-center justify-between mb-3">
+              <h3
+                class="font-display font-semibold text-sm text-text uppercase tracking-wider"
+              >
+                Max Price
+              </h3>
+              <span
+                id="price-range-display"
+                class="font-display font-bold text-xs text-accent"
+                >$250</span
+              >
+            </div>
+            <input
+              type="range"
+              id="max-price-range"
+              min="20"
+              max="250"
+              step="5"
+              value="250"
+              class="w-full accent-accent cursor-pointer"
+              aria-label="Maximum price filter"
+            />
+            <div
+              class="flex items-center justify-between text-[10px] text-muted mt-1"
+            >
+              <span>$20</span>
+              <span>$250</span>
+            </div>
+          </div>
+
+          <!-- Custom builder callout -->
+          <div
+            class="bg-gradient-to-br from-surface to-surface-2 rounded-xl border border-accent/30 p-5 flex flex-col gap-3"
+          >
+            <div
+              class="flex items-center gap-2 text-accent text-xs font-bold uppercase tracking-wider"
+            >
+              <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+              <span>Need custom parts?</span>
+            </div>
+            <p class="text-xs text-muted leading-relaxed">
+              Use our interactive Keyboard Builder to test compatibility and
+              assemble your bespoke board.
+            </p>
+            <a
+              href="./Builder.html"
+              class="inline-flex items-center justify-center px-4 py-2 rounded-lg text-xs font-semibold bg-accent text-on-accent hover:bg-accent-hover transition-colors"
+            >
+              Open Builder
+            </a>
+          </div>
+        </aside>
+
+        <!-- Product Grid Area -->
+        <section class="lg:col-span-3 flex flex-col" aria-label="Product list">
+          <!-- Dynamic Products Grid -->
+          <div
+            id="product-grid"
+            class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6"
+          ></div>
+
+          <!-- Empty State -->
+          <div
+            id="empty-results"
+            class="hidden flex flex-col items-center justify-center py-16 px-4 text-center bg-surface rounded-2xl border border-border mt-4"
+          >
+            <div
+              class="w-16 h-16 rounded-full bg-surface-2 flex items-center justify-center text-muted text-2xl mb-4 border border-border"
+            >
+              <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            </div>
+            <h3 class="font-display font-bold text-xl text-text mb-2">
+              No matching keyboard parts
+            </h3>
+            <p class="text-sm text-muted max-w-sm mb-6">
+              We couldn't find any products matching your selected search terms
+              or filters. Try adjusting your parameters.
+            </p>
+            <button
+              type="button"
+              id="empty-reset-btn"
+              class="px-5 py-2.5 rounded-xl font-semibold text-xs bg-accent hover:bg-accent-hover text-on-accent transition-colors cursor-pointer"
+            >
+              Reset all filters
+            </button>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full bg-surface border-t border-border mt-16">
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col md:flex-row items-center justify-between gap-6"
+      >
+        <div class="flex items-center gap-3">
+          <div>
+            <span class="font-display font-bold text-lg text-text"
+              >Keycap Lab</span
+            >
+            <p class="text-xs text-muted">
+              Premium parts and preset bundles for custom keyboards.
+            </p>
+          </div>
+        </div>
+
+        <nav
+          class="flex flex-wrap items-center gap-6 text-xs text-muted"
+          aria-label="Footer links"
+        >
+          <a href="../index.html" class="hover:text-text transition-colors"
+            >Home</a
+          >
+          <a href="./shop.html" class="hover:text-text transition-colors"
+            >Shop All</a
+          >
+          <a
+            href="./shop.html#bundles"
+            class="hover:text-text transition-colors"
+            >Preset Kits</a
+          >
+          <a href="./Builder.html" class="hover:text-text transition-colors"
+            >Keyboard Builder</a
+          >
+          <a href="./wishlist.html" class="hover:text-text transition-colors"
+            >Wishlist</a
+          >
+          <a href="./account.html" class="hover:text-text transition-colors"
+            >My Account</a
+          >
+        </nav>
+
+        <p class="text-xs text-muted">
+          &copy; 2026 Keycap Lab. All rights reserved.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

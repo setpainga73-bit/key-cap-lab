@@ -1,0 +1,936 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Keycap Lab | Custom Keyboard Parts & Preset Kits</title>
+    <meta
+      name="description"
+      content="Cases, PCBs, switches and keycaps that fit together, or a ready-made kit that ships in one box."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./dist/output.css" />
+    <script src="./JS/products.js" defer></script>
+    <script src="./JS/cart.js" defer></script>
+    <script src="./JS/nav-bar.js" defer></script>
+  </head>
+  <body
+    class="bg-bg text-text font-body min-h-screen flex flex-col selection:bg-accent selection:text-on-accent"
+  >
+    <!-- Main Navigation Bar -->
+    <header
+      class="sticky top-0 z-40 w-full bg-bg/95 backdrop-blur-md border-b border-border"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4"
+      >
+        <!-- Logo -->
+        <div class="flex items-center gap-8">
+          <a
+            href="./index.html"
+            class="flex items-center gap-2.5 font-display font-bold text-xl text-text hover:text-accent transition-colors"
+          >
+            <span>Keycap Lab</span>
+          </a>
+
+          <!-- Desktop Links -->
+          <nav
+            class="hidden md:flex items-center gap-6"
+            aria-label="Desktop Navigation"
+          >
+            <a
+              href="./HTML/shop.html"
+              class="text-sm font-medium text-muted hover:text-text transition-colors"
+              >Shop</a
+            >
+            <a
+              href="./HTML/shop.html#bundles"
+              class="text-sm font-medium text-muted hover:text-text transition-colors"
+              >Bundles</a
+            >
+            <a
+              href="./HTML/Builder.html"
+              class="text-sm font-medium text-muted hover:text-text transition-colors"
+              >Builder</a
+            >
+          </nav>
+        </div>
+
+        <!-- Right Side Nav Actions -->
+        <div class="flex items-center gap-3 sm:gap-4">
+          <!-- Search box -->
+          <div class="hidden lg:flex items-center relative w-56">
+            <i
+              class="fa-solid fa-magnifying-glass absolute left-3 text-muted text-xs pointer-events-none"
+              aria-hidden="true"
+            ></i>
+            <input
+              type="search"
+              placeholder="Search parts (Enter)..."
+              class="w-full bg-surface border border-border focus:border-accent text-text placeholder:text-muted rounded-xl pl-8 pr-3 py-1.5 text-xs focus:outline-none transition-colors"
+              data-nav-search
+              aria-label="Search keyboard parts"
+            />
+          </div>
+
+          <!-- Wishlist link -->
+          <a
+            href="./HTML/wishlist.html"
+            class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-muted hover:text-accent hover:bg-surface transition-colors text-sm"
+            aria-label="Wishlist"
+          >
+            <i class="fa-regular fa-heart text-base" aria-hidden="true"></i>
+            <span class="hidden sm:inline font-medium">Wishlist</span>
+            <span
+              class="wishlist-count inline-flex items-center justify-center px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-surface-2 text-accent border border-accent/20"
+              >0</span
+            >
+          </a>
+
+          <!-- Cart link -->
+          <a
+            href="./HTML/Cart.html"
+            class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-surface border border-border hover:border-accent text-text transition-colors text-sm"
+            aria-label="View Cart"
+          >
+            <i
+              class="fa-solid fa-cart-shopping text-accent text-sm"
+              aria-hidden="true"
+            ></i>
+            <span class="hidden sm:inline font-medium">Cart</span>
+            <span
+              class="cart-count inline-flex items-center justify-center px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-accent text-on-accent"
+              >0</span
+            >
+          </a>
+
+          <!-- Logged out buttons -->
+          <div class="hidden sm:flex items-center gap-2" data-auth-logged-out>
+            <a
+              href="./HTML/Login.html"
+              class="px-3.5 py-1.5 rounded-xl text-xs font-semibold text-text hover:text-accent border border-border hover:border-muted transition-colors"
+              >Log in</a
+            >
+            <a
+              href="./HTML/Register.html"
+              class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-accent hover:bg-accent-hover text-on-accent transition-colors"
+              >Register</a
+            >
+          </div>
+
+          <!-- Logged in buttons -->
+          <div class="hidden sm:flex items-center gap-2" data-auth-logged-in>
+            <a
+              href="./HTML/account.html"
+              class="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-surface-2 hover:bg-surface border border-accent/40 text-accent transition-colors"
+              >Account</a
+            >
+            <button
+              type="button"
+              data-nav-logout
+              class="px-2.5 py-1.5 rounded-xl text-xs font-medium text-muted hover:text-red-400 transition-colors cursor-pointer"
+              aria-label="Log out"
+            >
+              <i
+                class="fa-solid fa-arrow-right-from-bracket"
+                aria-hidden="true"
+              ></i>
+            </button>
+          </div>
+
+          <!-- Mobile Menu Hamburger Button -->
+          <button
+            type="button"
+            class="md:hidden flex flex-col justify-center items-center w-9 h-9 rounded-xl border border-border bg-surface text-text hover:border-accent transition-colors cursor-pointer"
+            data-menu-toggle
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="mobile-drawer"
+          >
+            <i class="fa-solid fa-bars text-sm" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Drawer & Backdrop -->
+    <div
+      class="fixed inset-0 z-40 bg-black/70 backdrop-blur-xs transition-opacity duration-300 opacity-0 pointer-events-none"
+      data-drawer-backdrop
+      tabindex="-1"
+      aria-hidden="true"
+    ></div>
+
+    <aside
+      id="mobile-drawer"
+      class="fixed inset-y-0 right-0 z-50 w-full max-w-xs bg-bg border-l border-border flex flex-col transition-transform duration-300 translate-x-full shadow-2xl"
+      data-mobile-drawer
+      aria-label="Mobile Navigation"
+      aria-hidden="true"
+    >
+      <!-- Drawer Header -->
+      <div class="flex items-center justify-between p-4 border-b border-border">
+        <div class="flex items-center gap-2">
+          <span class="font-display font-bold text-lg text-text"
+            >Keycap Lab</span
+          >
+        </div>
+        <button
+          type="button"
+          class="p-2 rounded-lg text-muted hover:text-text cursor-pointer transition-colors"
+          data-drawer-close
+          aria-label="Close navigation menu"
+        >
+          <i class="fa-solid fa-xmark text-lg" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- Drawer Content -->
+      <div class="flex-1 overflow-y-auto p-4 flex flex-col gap-6">
+        <!-- Search -->
+        <div class="relative w-full">
+          <i
+            class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-muted text-xs pointer-events-none"
+            aria-hidden="true"
+          ></i>
+          <input
+            type="search"
+            placeholder="Search parts..."
+            class="w-full bg-surface border border-border focus:border-accent text-text placeholder:text-muted rounded-xl pl-9 pr-3 py-2 text-sm focus:outline-none transition-colors"
+            data-nav-search
+            aria-label="Search keyboard parts mobile"
+          />
+        </div>
+
+        <!-- Navigation Links -->
+        <nav
+          class="flex flex-col gap-1 border-b border-border pb-4"
+          aria-label="Mobile links"
+        >
+          <a
+            href="./HTML/shop.html"
+            class="flex items-center justify-between py-2.5 px-3 rounded-lg text-base font-medium text-text hover:bg-surface transition-colors"
+          >
+            <span>Shop All Products</span>
+            <i
+              class="fa-solid fa-chevron-right text-xs text-muted"
+              aria-hidden="true"
+            ></i>
+          </a>
+          <a
+            href="./HTML/shop.html#bundles"
+            class="flex items-center justify-between py-2.5 px-3 rounded-lg text-base font-medium text-text hover:bg-surface transition-colors"
+          >
+            <span>Preset Bundles</span>
+            <i
+              class="fa-solid fa-chevron-right text-xs text-muted"
+              aria-hidden="true"
+            ></i>
+          </a>
+          <a
+            href="./HTML/Builder.html"
+            class="flex items-center justify-between py-2.5 px-3 rounded-lg text-base font-medium text-text hover:bg-surface transition-colors"
+          >
+            <span>Keyboard Builder</span>
+            <span
+              class="px-2 py-0.5 rounded text-[10px] font-bold bg-accent/20 text-accent border border-accent/30"
+              >Interactive</span
+            >
+          </a>
+          <a
+            href="./HTML/wishlist.html"
+            class="flex items-center justify-between py-2.5 px-3 rounded-lg text-base font-medium text-text hover:bg-surface transition-colors"
+          >
+            <span>Saved Wishlist</span>
+            <span
+              class="wishlist-count px-2 py-0.5 rounded-full text-xs font-bold bg-surface-2 text-accent"
+              >0</span
+            >
+          </a>
+          <a
+            href="./HTML/Cart.html"
+            class="flex items-center justify-between py-2.5 px-3 rounded-lg text-base font-medium text-text hover:bg-surface transition-colors"
+          >
+            <span>Shopping Cart</span>
+            <span
+              class="cart-count px-2 py-0.5 rounded-full text-xs font-bold bg-accent text-on-accent"
+              >0</span
+            >
+          </a>
+        </nav>
+
+        <!-- Auth Section Mobile -->
+        <div class="mt-auto flex flex-col gap-2 pt-4">
+          <div class="flex flex-col gap-2" data-auth-logged-out>
+            <a
+              href="./HTML/Login.html"
+              class="w-full py-2.5 text-center rounded-xl text-sm font-semibold border border-border text-text hover:border-muted transition-colors"
+              >Log in</a
+            >
+            <a
+              href="./HTML/Register.html"
+              class="w-full py-2.5 text-center rounded-xl text-sm font-semibold bg-accent hover:bg-accent-hover text-on-accent transition-colors"
+              >Register</a
+            >
+          </div>
+          <div class="flex flex-col gap-2" data-auth-logged-in>
+            <a
+              href="./HTML/account.html"
+              class="w-full py-2.5 text-center rounded-xl text-sm font-semibold bg-surface-2 border border-accent/40 text-accent transition-colors"
+              >My Account Dashboard</a
+            >
+            <button
+              type="button"
+              data-nav-logout
+              class="w-full py-2.5 text-center rounded-xl text-sm font-semibold text-muted hover:text-red-400 border border-border transition-colors cursor-pointer"
+            >
+              Sign out
+            </button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Page Content -->
+    <main class="flex-1">
+      <!-- Hero Section -->
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+        <div
+          class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
+        >
+          <!-- Hero Copy -->
+          <div class="lg:col-span-7 flex flex-col items-start gap-6">
+            <span
+              class="px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-accent/10 border border-accent/30 text-accent"
+            >
+              PC Keyboard Parts &amp; Bundles
+            </span>
+            <h1
+              class="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-text leading-[1.1] tracking-tight"
+            >
+              Build the board you actually want
+            </h1>
+            <p class="text-base sm:text-lg text-muted max-w-xl leading-relaxed">
+              Cases, PCBs, switches and keycaps that fit together seamlessly, or
+              ready-made kits engineered to ship straight to your door in one
+              box.
+            </p>
+            <div
+              class="flex flex-wrap items-center gap-4 pt-2 w-full sm:w-auto"
+            >
+              <a
+                href="./HTML/shop.html#bundles"
+                class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 rounded-xl font-semibold text-sm bg-accent hover:bg-accent-hover text-on-accent transition-colors shadow-lg shadow-accent/10 cursor-pointer"
+              >
+                Shop bundles
+              </a>
+              <a
+                href="./HTML/Builder.html"
+                class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 rounded-xl font-semibold text-sm bg-surface hover:bg-surface-2 text-text border border-border hover:border-muted transition-colors cursor-pointer"
+              >
+                Build your own
+              </a>
+            </div>
+            <!-- Trust badges -->
+            <div
+              class="grid grid-cols-3 gap-4 pt-4 border-t border-border w-full text-xs text-muted"
+            >
+              <div>
+                <strong class="block font-bold text-text text-sm">100%</strong>
+                <span>Hotswap Compatible</span>
+              </div>
+              <div>
+                <strong class="block font-bold text-text text-sm">Free</strong>
+                <span>Shipping over $100</span>
+              </div>
+              <div>
+                <strong class="block font-bold text-text text-sm"
+                  >VIA / QMK</strong
+                >
+                <span>Fully Programmable</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Media -->
+          <div
+            class="lg:col-span-5 relative w-full h-[320px] sm:h-[400px] lg:h-[480px] rounded-2xl overflow-hidden bg-surface-2 border border-border shadow-2xl group"
+          >
+            <img
+              src="./IMG/hero-keyboard.webp"
+              alt="Custom white mechanical keyboard on desk"
+              class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+              fetchpriority="high"
+            />
+            <div
+              class="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-bg/85 backdrop-blur-md border border-border flex items-center justify-between"
+            >
+              <div>
+                <span
+                  class="text-[11px] font-semibold text-accent uppercase tracking-wider"
+                  >Featured Preset</span
+                >
+                <h3 class="font-display font-bold text-sm text-text">
+                  Starter 65% Kit
+                </h3>
+              </div>
+              <a
+                href="./HTML/Product_Detail.html?id=starter-65-kit"
+                class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-accent text-on-accent hover:bg-accent-hover transition-colors"
+              >
+                Explore &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Preset Kits Section -->
+      <section
+        id="bundles"
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-border"
+        aria-labelledby="kits-title"
+      >
+        <div
+          class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8"
+        >
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-accent"
+              >Curated All-In-One</span
+            >
+            <h2
+              id="kits-title"
+              class="font-display font-bold text-2xl sm:text-3xl text-text mt-1"
+            >
+              Preset kits
+            </h2>
+          </div>
+          <a
+            href="./HTML/shop.html?category=kits"
+            class="inline-flex items-center gap-1 text-sm font-semibold text-accent hover:underline"
+          >
+            <span>View all bundles</span>
+            <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Starter 65% Kit -->
+          <article
+            class="group relative flex flex-col justify-between p-4 bg-surface rounded-xl border border-border hover:border-muted transition-colors duration-200"
+            data-cart-product="true"
+            data-id="starter-65-kit"
+            data-name="Starter 65% Kit"
+            data-price="129"
+            data-subtitle="65% / hotswap / linear"
+            data-image="./IMG/keyboard-retro.jpg"
+          >
+            <div
+              class="relative w-full h-48 rounded-lg overflow-hidden bg-surface-2 mb-4"
+            >
+              <img
+                src="./IMG/keyboard-retro.jpg"
+                alt="Starter 65% Kit"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
+              <span
+                class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded text-[11px] font-semibold bg-bg/85 border border-border text-accent backdrop-blur-xs"
+              >
+                Popular
+              </span>
+              <button
+                type="button"
+                class="absolute top-2.5 right-2.5 p-2 rounded-full bg-bg/80 border border-border text-muted hover:text-accent hover:border-accent transition-colors cursor-pointer z-10"
+                data-wishlist-toggle="true"
+                data-product-id="starter-65-kit"
+                data-product-name="Starter 65% Kit"
+                data-product-price="129"
+                data-product-subtitle="65% / hotswap / linear"
+                data-product-image="./IMG/keyboard-retro.jpg"
+                aria-label="Add Starter 65% Kit to wishlist"
+              >
+                <i class="fa-regular fa-heart text-sm" aria-hidden="true"></i>
+              </button>
+            </div>
+
+            <div class="flex-1 flex flex-col">
+              <div class="flex items-center gap-1.5 mb-1 text-xs text-muted">
+                <span class="text-accent flex items-center gap-1">
+                  <i
+                    class="fa-solid fa-star text-[10px]"
+                    aria-hidden="true"
+                  ></i>
+                  <span class="font-semibold text-text">4.9</span>
+                </span>
+                <span>(38)</span>
+                <span class="mx-1">•</span>
+                <span>65% Layout</span>
+              </div>
+              <h3
+                class="font-display font-medium text-base text-text group-hover:text-accent transition-colors"
+              >
+                <a
+                  href="./HTML/Product_Detail.html?id=starter-65-kit"
+                  class="after:absolute after:inset-0 after:z-0"
+                >
+                  Starter 65% Kit
+                </a>
+              </h3>
+              <p class="text-xs text-muted mt-1 mb-4">65% / hotswap / linear</p>
+            </div>
+
+            <div
+              class="relative z-10 flex items-center justify-between pt-3 border-t border-border mt-auto"
+            >
+              <span class="font-display font-bold text-lg text-accent"
+                >$129</span
+              >
+              <button
+                type="button"
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-surface-2 hover:bg-accent hover:text-on-accent text-text border border-border hover:border-accent transition-colors cursor-pointer"
+                data-cart-add="true"
+                aria-label="Add Starter 65% Kit to cart"
+              >
+                <i class="fa-solid fa-plus text-[10px]" aria-hidden="true"></i>
+                Add to cart
+              </button>
+            </div>
+          </article>
+
+          <!-- Quiet Office Kit -->
+          <article
+            class="group relative flex flex-col justify-between p-4 bg-surface rounded-xl border border-border hover:border-muted transition-colors duration-200"
+            data-cart-product="true"
+            data-id="quiet-office-kit"
+            data-name="Quiet Office Kit"
+            data-price="189"
+            data-subtitle="75% / tactile / foam"
+            data-image="./IMG/keyboard-desk-setup.jpg"
+          >
+            <div
+              class="relative w-full h-48 rounded-lg overflow-hidden bg-surface-2 mb-4"
+            >
+              <img
+                src="./IMG/keyboard-desk-setup.jpg"
+                alt="Quiet Office Kit"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
+              <span
+                class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded text-[11px] font-semibold bg-bg/85 border border-border text-accent backdrop-blur-xs"
+              >
+                Silent
+              </span>
+              <button
+                type="button"
+                class="absolute top-2.5 right-2.5 p-2 rounded-full bg-bg/80 border border-border text-muted hover:text-accent hover:border-accent transition-colors cursor-pointer z-10"
+                data-wishlist-toggle="true"
+                data-product-id="quiet-office-kit"
+                data-product-name="Quiet Office Kit"
+                data-product-price="189"
+                data-product-subtitle="75% / tactile / foam"
+                data-product-image="./IMG/keyboard-desk-setup.jpg"
+                aria-label="Add Quiet Office Kit to wishlist"
+              >
+                <i class="fa-regular fa-heart text-sm" aria-hidden="true"></i>
+              </button>
+            </div>
+
+            <div class="flex-1 flex flex-col">
+              <div class="flex items-center gap-1.5 mb-1 text-xs text-muted">
+                <span class="text-accent flex items-center gap-1">
+                  <i
+                    class="fa-solid fa-star text-[10px]"
+                    aria-hidden="true"
+                  ></i>
+                  <span class="font-semibold text-text">4.8</span>
+                </span>
+                <span>(24)</span>
+                <span class="mx-1">•</span>
+                <span>75% Layout</span>
+              </div>
+              <h3
+                class="font-display font-medium text-base text-text group-hover:text-accent transition-colors"
+              >
+                <a
+                  href="./HTML/Product_Detail.html?id=quiet-office-kit"
+                  class="after:absolute after:inset-0 after:z-0"
+                >
+                  Quiet Office Kit
+                </a>
+              </h3>
+              <p class="text-xs text-muted mt-1 mb-4">75% / tactile / foam</p>
+            </div>
+
+            <div
+              class="relative z-10 flex items-center justify-between pt-3 border-t border-border mt-auto"
+            >
+              <span class="font-display font-bold text-lg text-accent"
+                >$189</span
+              >
+              <button
+                type="button"
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-surface-2 hover:bg-accent hover:text-on-accent text-text border border-border hover:border-accent transition-colors cursor-pointer"
+                data-cart-add="true"
+                aria-label="Add Quiet Office Kit to cart"
+              >
+                <i class="fa-solid fa-plus text-[10px]" aria-hidden="true"></i>
+                Add to cart
+              </button>
+            </div>
+          </article>
+
+          <!-- Compact 60% Kit -->
+          <article
+            class="group relative flex flex-col justify-between p-4 bg-surface rounded-xl border border-border hover:border-muted transition-colors duration-200"
+            data-cart-product="true"
+            data-id="compact-60-kit"
+            data-name="Compact 60% Kit"
+            data-price="149"
+            data-subtitle="60% / hotswap / clicky"
+            data-image="./IMG/keyboard-compact.jpg"
+          >
+            <div
+              class="relative w-full h-48 rounded-lg overflow-hidden bg-surface-2 mb-4"
+            >
+              <img
+                src="./IMG/keyboard-compact.jpg"
+                alt="Compact 60% Kit"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
+              <span
+                class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded text-[11px] font-semibold bg-bg/85 border border-border text-accent backdrop-blur-xs"
+              >
+                Ultra Compact
+              </span>
+              <button
+                type="button"
+                class="absolute top-2.5 right-2.5 p-2 rounded-full bg-bg/80 border border-border text-muted hover:text-accent hover:border-accent transition-colors cursor-pointer z-10"
+                data-wishlist-toggle="true"
+                data-product-id="compact-60-kit"
+                data-product-name="Compact 60% Kit"
+                data-product-price="149"
+                data-product-subtitle="60% / hotswap / clicky"
+                data-product-image="./IMG/keyboard-compact.jpg"
+                aria-label="Add Compact 60% Kit to wishlist"
+              >
+                <i class="fa-regular fa-heart text-sm" aria-hidden="true"></i>
+              </button>
+            </div>
+
+            <div class="flex-1 flex flex-col">
+              <div class="flex items-center gap-1.5 mb-1 text-xs text-muted">
+                <span class="text-accent flex items-center gap-1">
+                  <i
+                    class="fa-solid fa-star text-[10px]"
+                    aria-hidden="true"
+                  ></i>
+                  <span class="font-semibold text-text">4.7</span>
+                </span>
+                <span>(19)</span>
+                <span class="mx-1">•</span>
+                <span>60% Layout</span>
+              </div>
+              <h3
+                class="font-display font-medium text-base text-text group-hover:text-accent transition-colors"
+              >
+                <a
+                  href="./HTML/Product_Detail.html?id=compact-60-kit"
+                  class="after:absolute after:inset-0 after:z-0"
+                >
+                  Compact 60% Kit
+                </a>
+              </h3>
+              <p class="text-xs text-muted mt-1 mb-4">60% / hotswap / clicky</p>
+            </div>
+
+            <div
+              class="relative z-10 flex items-center justify-between pt-3 border-t border-border mt-auto"
+            >
+              <span class="font-display font-bold text-lg text-accent"
+                >$149</span
+              >
+              <button
+                type="button"
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-surface-2 hover:bg-accent hover:text-on-accent text-text border border-border hover:border-accent transition-colors cursor-pointer"
+                data-cart-add="true"
+                aria-label="Add Compact 60% Kit to cart"
+              >
+                <i class="fa-solid fa-plus text-[10px]" aria-hidden="true"></i>
+                Add to cart
+              </button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Shop by Layout Section -->
+      <section
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-border"
+        aria-labelledby="layout-title"
+      >
+        <div class="mb-8">
+          <span class="text-xs font-bold uppercase tracking-wider text-accent"
+            >Form Factors</span
+          >
+          <h2
+            id="layout-title"
+            class="font-display font-bold text-2xl sm:text-3xl text-text mt-1"
+          >
+            Shop by layout
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <!-- 60% -->
+          <a
+            href="./HTML/shop.html?layout=60"
+            class="group flex flex-col justify-between p-6 rounded-xl bg-surface border border-border hover:border-accent transition-all duration-200 hover:-translate-y-1"
+          >
+            <div>
+              <strong
+                class="block font-display font-bold text-3xl text-text group-hover:text-accent transition-colors"
+                >60%</strong
+              >
+              <span class="text-xs text-muted mt-1 block"
+                >Ultra-compact, pure minimalism without arrows</span
+              >
+            </div>
+            <div
+              class="flex items-center justify-between mt-6 text-xs font-semibold text-accent"
+            >
+              <span>Browse parts</span>
+              <i
+                class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"
+                aria-hidden="true"
+              ></i>
+            </div>
+          </a>
+
+          <!-- 65% -->
+          <a
+            href="./HTML/shop.html?layout=65"
+            class="group flex flex-col justify-between p-6 rounded-xl bg-surface border border-border hover:border-accent transition-all duration-200 hover:-translate-y-1"
+          >
+            <div>
+              <strong
+                class="block font-display font-bold text-3xl text-text group-hover:text-accent transition-colors"
+                >65%</strong
+              >
+              <span class="text-xs text-muted mt-1 block"
+                >The enthusiast favorite: compact with arrow keys</span
+              >
+            </div>
+            <div
+              class="flex items-center justify-between mt-6 text-xs font-semibold text-accent"
+            >
+              <span>Browse parts</span>
+              <i
+                class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"
+                aria-hidden="true"
+              ></i>
+            </div>
+          </a>
+
+          <!-- 75% -->
+          <a
+            href="./HTML/shop.html?layout=75"
+            class="group flex flex-col justify-between p-6 rounded-xl bg-surface border border-border hover:border-accent transition-all duration-200 hover:-translate-y-1"
+          >
+            <div>
+              <strong
+                class="block font-display font-bold text-3xl text-text group-hover:text-accent transition-colors"
+                >75%</strong
+              >
+              <span class="text-xs text-muted mt-1 block"
+                >Dedicated function row and navigation column</span
+              >
+            </div>
+            <div
+              class="flex items-center justify-between mt-6 text-xs font-semibold text-accent"
+            >
+              <span>Browse parts</span>
+              <i
+                class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"
+                aria-hidden="true"
+              ></i>
+            </div>
+          </a>
+
+          <!-- TKL -->
+          <a
+            href="./HTML/shop.html?layout=tkl"
+            class="group flex flex-col justify-between p-6 rounded-xl bg-surface border border-border hover:border-accent transition-all duration-200 hover:-translate-y-1"
+          >
+            <div>
+              <strong
+                class="block font-display font-bold text-3xl text-text group-hover:text-accent transition-colors"
+                >TKL</strong
+              >
+              <span class="text-xs text-muted mt-1 block"
+                >Tenkeyless standard footprint for work &amp; play</span
+              >
+            </div>
+            <div
+              class="flex items-center justify-between mt-6 text-xs font-semibold text-accent"
+            >
+              <span>Browse parts</span>
+              <i
+                class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"
+                aria-hidden="true"
+              ></i>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- How the builder works -->
+      <section
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-border"
+        aria-labelledby="how-title"
+      >
+        <div
+          class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10"
+        >
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-accent"
+              >Simple 4-Step Process</span
+            >
+            <h2
+              id="how-title"
+              class="font-display font-bold text-2xl sm:text-3xl text-text mt-1"
+            >
+              How the builder works
+            </h2>
+          </div>
+          <a
+            href="./HTML/Builder.html"
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-accent text-on-accent hover:bg-accent-hover transition-colors"
+          >
+            <span>Launch Builder</span>
+            <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+          </a>
+        </div>
+
+        <ol
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 list-none p-0"
+        >
+          <!-- Step 01 -->
+          <li
+            class="p-6 rounded-xl bg-surface border border-border flex flex-col gap-3"
+          >
+            <span class="font-display font-bold text-3xl text-accent">01</span>
+            <h3 class="font-display font-bold text-lg text-text">
+              Pick a layout
+            </h3>
+            <p class="text-xs sm:text-sm text-muted leading-relaxed">
+              Start with 60%, 65%, 75% or TKL to determine the physical size of
+              your board.
+            </p>
+          </li>
+          <!-- Step 02 -->
+          <li
+            class="p-6 rounded-xl bg-surface border border-border flex flex-col gap-3"
+          >
+            <span class="font-display font-bold text-3xl text-accent">02</span>
+            <h3 class="font-display font-bold text-lg text-text">
+              Case and PCB
+            </h3>
+            <p class="text-xs sm:text-sm text-muted leading-relaxed">
+              Our builder automatically hides incompatible components so you
+              never order parts that don't fit.
+            </p>
+          </li>
+          <!-- Step 03 -->
+          <li
+            class="p-6 rounded-xl bg-surface border border-border flex flex-col gap-3"
+          >
+            <span class="font-display font-bold text-3xl text-accent">03</span>
+            <h3 class="font-display font-bold text-lg text-text">
+              Switches &amp; keycaps
+            </h3>
+            <p class="text-xs sm:text-sm text-muted leading-relaxed">
+              Choose linear, tactile, or silent switches alongside premium
+              dye-sub PBT keycaps.
+            </p>
+          </li>
+          <!-- Step 04 -->
+          <li
+            class="p-6 rounded-xl bg-surface border border-border flex flex-col gap-3"
+          >
+            <span class="font-display font-bold text-3xl text-accent">04</span>
+            <h3 class="font-display font-bold text-lg text-text">
+              Review and order
+            </h3>
+            <p class="text-xs sm:text-sm text-muted leading-relaxed">
+              See every single part and the live calculated total price before
+              adding to your cart.
+            </p>
+          </li>
+        </ol>
+      </section>
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="w-full bg-surface border-t border-border mt-16">
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col md:flex-row items-center justify-between gap-6"
+      >
+        <div class="flex items-center gap-3">
+          <div>
+            <span class="font-display font-bold text-lg text-text"
+              >Keycap Lab</span
+            >
+            <p class="text-xs text-muted">
+              Premium parts and preset bundles for custom keyboards.
+            </p>
+          </div>
+        </div>
+
+        <nav
+          class="flex flex-wrap items-center gap-6 text-xs text-muted"
+          aria-label="Footer links"
+        >
+          <a href="./HTML/shop.html" class="hover:text-text transition-colors"
+            >Shop All</a
+          >
+          <a
+            href="./HTML/shop.html#bundles"
+            class="hover:text-text transition-colors"
+            >Preset Kits</a
+          >
+          <a
+            href="./HTML/Builder.html"
+            class="hover:text-text transition-colors"
+            >Keyboard Builder</a
+          >
+          <a
+            href="./HTML/wishlist.html"
+            class="hover:text-text transition-colors"
+            >Wishlist</a
+          >
+          <a
+            href="./HTML/account.html"
+            class="hover:text-text transition-colors"
+            >My Account</a
+          >
+        </nav>
+
+        <p class="text-xs text-muted">
+          &copy; 2026 Keycap Lab. All rights reserved.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
