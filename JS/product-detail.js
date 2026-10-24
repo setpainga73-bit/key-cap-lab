@@ -221,7 +221,7 @@
           : false;
         const relCard = document.createElement("article");
         relCard.className =
-          "group relative flex flex-col justify-between p-4 bg-surface rounded-xl border border-border hover:border-muted transition-colors";
+          "group relative flex flex-col justify-between p-4 bg-surface rounded-xl border border-border transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-lg hover:shadow-accent/5";
         relCard.innerHTML = `
           <div class="relative w-full h-40 rounded-lg overflow-hidden bg-surface-2 mb-3">
             <img src="${rel.image}" alt="${rel.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />

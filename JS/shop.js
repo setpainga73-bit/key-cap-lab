@@ -200,7 +200,7 @@
 
       const article = document.createElement("article");
       article.className =
-        "group relative flex flex-col justify-between p-4 bg-surface rounded-xl border border-border hover:border-muted transition-colors duration-200";
+        "group relative flex flex-col justify-between p-4 bg-surface rounded-xl border border-border transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-lg hover:shadow-accent/5";
       article.dataset.cartProduct = "true";
       article.dataset.id = product.id;
       article.dataset.name = product.name;
