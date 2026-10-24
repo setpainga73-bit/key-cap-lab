@@ -116,7 +116,7 @@
       if (reviewContainer) {
         reviewContainer.innerHTML = `
           <div class="bg-surface rounded-xl border border-border p-6 flex flex-col gap-4">
-            <h3 class="font-display font-bold text-lg text-text border-b border-border pb-3">Build Specification Breakdown</h3>
+            <h2 class="font-display font-bold text-lg text-text border-b border-border pb-3">Build Specification Breakdown</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div class="flex flex-col gap-3">
                 <div class="flex items-center justify-between p-3 rounded-lg bg-surface-2 border border-border">

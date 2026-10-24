@@ -350,26 +350,54 @@
       </nav>
 
       <!-- Step Header -->
-      <div class="mb-6">
-        <span
-          id="builder-step-kicker"
-          class="text-xs font-bold uppercase tracking-wider text-accent"
-          >Step 1 of 6</span
+      <div class="mb-6 grid grid-cols-1 sm:grid-cols-2 gap-5 sm:items-center">
+        <div>
+          <span
+            id="builder-step-kicker"
+            class="text-xs font-bold uppercase tracking-wider text-accent"
+            >Step 1 of 6</span
+          >
+          <h1
+            id="builder-step-title"
+            class="font-display font-bold text-2xl sm:text-3xl text-text mt-1"
+          >
+            Choose your layout
+          </h1>
+          <p id="builder-step-desc" class="text-sm text-muted mt-1">
+            Select the footprint and form factor for your custom keyboard.
+          </p>
+          <p
+            id="builder-step-error"
+            class="text-xs font-semibold text-red-400 mt-2 min-h-[1rem]"
+            aria-live="polite"
+          ></p>
+        </div>
+        <figure
+          class="relative aspect-[16/9] overflow-hidden rounded-xl border border-border bg-surface-2"
         >
-        <h1
-          id="builder-step-title"
-          class="font-display font-bold text-2xl sm:text-3xl text-text mt-1"
-        >
-          Choose your layout
-        </h1>
-        <p id="builder-step-desc" class="text-sm text-muted mt-1">
-          Select the footprint and form factor for your custom keyboard.
-        </p>
-        <p
-          id="builder-step-error"
-          class="text-xs font-semibold text-red-400 mt-2 min-h-[1rem]"
-          aria-live="polite"
-        ></p>
+          <img
+            src="../IMG/inspiration-slate-coral.webp"
+            alt="Close-up of a grey mechanical keyboard with blue-gray keycaps and a vivid pink Enter key."
+            width="1800"
+            height="1200"
+            class="h-full w-full object-cover"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
+          <figcaption
+            class="absolute inset-x-0 bottom-0 bg-bg/85 px-3 py-2 text-[11px] text-muted"
+          >
+            Photo by
+            <a
+              href="https://unsplash.com/photos/close-up-of-a-mechanical-keyboard-with-grey-keycaps-q_GUQgitIDs"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-accent hover:underline"
+              >Far Chinberdiev on Unsplash</a
+            >
+          </figcaption>
+        </figure>
       </div>
 
       <!-- Builder Layout: Steps Content & Summary Sidebar -->
@@ -536,9 +564,9 @@
             >
               <div>
                 <div class="flex items-center justify-between mb-2">
-                  <h3 class="font-display font-semibold text-base text-text">
+                  <h2 class="font-display font-semibold text-base text-text">
                     Studio Aluminum Case
-                  </h3>
+                  </h2>
                   <i
                     class="selection-check fa-solid fa-circle-check text-accent hidden"
                     aria-hidden="true"
@@ -572,9 +600,9 @@
             >
               <div>
                 <div class="flex items-center justify-between mb-2">
-                  <h3 class="font-display font-semibold text-base text-text">
+                  <h2 class="font-display font-semibold text-base text-text">
                     Frosted Polycarbonate Case
-                  </h3>
+                  </h2>
                   <i
                     class="selection-check fa-solid fa-circle-check text-accent hidden"
                     aria-hidden="true"
@@ -608,9 +636,9 @@
             >
               <div>
                 <div class="flex items-center justify-between mb-2">
-                  <h3 class="font-display font-semibold text-base text-text">
+                  <h2 class="font-display font-semibold text-base text-text">
                     Walnut Hardwood Case
-                  </h3>
+                  </h2>
                   <i
                     class="selection-check fa-solid fa-circle-check text-accent hidden"
                     aria-hidden="true"
@@ -650,9 +678,9 @@
             >
               <div>
                 <div class="flex items-center justify-between mb-2">
-                  <h3 class="font-display font-semibold text-base text-text">
+                  <h2 class="font-display font-semibold text-base text-text">
                     Hotswap RGB PCB
-                  </h3>
+                  </h2>
                   <i
                     class="selection-check fa-solid fa-circle-check text-accent hidden"
                     aria-hidden="true"
@@ -686,9 +714,9 @@
             >
               <div>
                 <div class="flex items-center justify-between mb-2">
-                  <h3 class="font-display font-semibold text-base text-text">
+                  <h2 class="font-display font-semibold text-base text-text">
                     Solderable Pro VIA PCB
-                  </h3>
+                  </h2>
                   <i
                     class="selection-check fa-solid fa-circle-check text-accent hidden"
                     aria-hidden="true"
@@ -727,9 +755,9 @@
             >
               <div>
                 <div class="flex items-center justify-between mb-2">
-                  <h3 class="font-display font-semibold text-base text-text">
+                  <h2 class="font-display font-semibold text-base text-text">
                     Gateron Oil King Linear
-                  </h3>
+                  </h2>
                   <i
                     class="selection-check fa-solid fa-circle-check text-accent hidden"
                     aria-hidden="true"
@@ -762,9 +790,9 @@
             >
               <div>
                 <div class="flex items-center justify-between mb-2">
-                  <h3 class="font-display font-semibold text-base text-text">
+                  <h2 class="font-display font-semibold text-base text-text">
                     Boba U4T Tactile
-                  </h3>
+                  </h2>
                   <i
                     class="selection-check fa-solid fa-circle-check text-accent hidden"
                     aria-hidden="true"
@@ -797,9 +825,9 @@
             >
               <div>
                 <div class="flex items-center justify-between mb-2">
-                  <h3 class="font-display font-semibold text-base text-text">
+                  <h2 class="font-display font-semibold text-base text-text">
                     Silent Peach Linear
-                  </h3>
+                  </h2>
                   <i
                     class="selection-check fa-solid fa-circle-check text-accent hidden"
                     aria-hidden="true"
@@ -832,9 +860,9 @@
             >
               <div>
                 <div class="flex items-center justify-between mb-2">
-                  <h3 class="font-display font-semibold text-base text-text">
+                  <h2 class="font-display font-semibold text-base text-text">
                     Clicky Blue Pro
-                  </h3>
+                  </h2>
                   <i
                     class="selection-check fa-solid fa-circle-check text-accent hidden"
                     aria-hidden="true"
@@ -873,9 +901,9 @@
             >
               <div>
                 <div class="flex items-center justify-between mb-2">
-                  <h3 class="font-display font-semibold text-base text-text">
+                  <h2 class="font-display font-semibold text-base text-text">
                     Minimalist Dark PBT
-                  </h3>
+                  </h2>
                   <i
                     class="selection-check fa-solid fa-circle-check text-accent hidden"
                     aria-hidden="true"
@@ -908,9 +936,9 @@
             >
               <div>
                 <div class="flex items-center justify-between mb-2">
-                  <h3 class="font-display font-semibold text-base text-text">
+                  <h2 class="font-display font-semibold text-base text-text">
                     Retro Classic Keycaps
-                  </h3>
+                  </h2>
                   <i
                     class="selection-check fa-solid fa-circle-check text-accent hidden"
                     aria-hidden="true"
@@ -943,9 +971,9 @@
             >
               <div>
                 <div class="flex items-center justify-between mb-2">
-                  <h3 class="font-display font-semibold text-base text-text">
+                  <h2 class="font-display font-semibold text-base text-text">
                     Amber Glow Doubleshot
-                  </h3>
+                  </h2>
                   <i
                     class="selection-check fa-solid fa-circle-check text-accent hidden"
                     aria-hidden="true"
@@ -978,9 +1006,9 @@
             >
               <div>
                 <div class="flex items-center justify-between mb-2">
-                  <h3 class="font-display font-semibold text-base text-text">
+                  <h2 class="font-display font-semibold text-base text-text">
                     Chalk White PBT Set
-                  </h3>
+                  </h2>
                   <i
                     class="selection-check fa-solid fa-circle-check text-accent hidden"
                     aria-hidden="true"
