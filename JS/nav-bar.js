@@ -125,11 +125,11 @@
     );
 
     authLoggedOutElements.forEach((el) => {
-      el.classList.toggle("hidden", isAuth);
+      el.style.display = isAuth ? "none" : "";
     });
 
     authLoggedInElements.forEach((el) => {
-      el.classList.toggle("hidden", !isAuth);
+      el.style.display = isAuth ? "" : "none";
     });
 
     document.querySelectorAll("[data-nav-logout]").forEach((btn) => {
